@@ -13,16 +13,16 @@ export const siteConfig = {
     backgroundMusic:"/background_music/Taylor Swift - Labyrinth (Official HD Audio) (mp3cut.net).mp3"
   },
   googleAPI:{
-    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSe-BGG96Vmw0EW7pffjhWUnXPLCE2cPT7QZLy4p9x9NK890Bw/formResponse",   //done
-    message: "https://script.google.com/macros/s/AKfycby8lqt6d3bE1mpXq7ggymZ4LsHTdu5GZ6zu3TzbfdfVn_XOJ8L6I_5JeCV3aHEZp3z6/exec",  //done
-    guestList: "https://script.google.com/macros/s/AKfycbyBjQh6nIbOwqBkHe0_v9GvGOBInzs8SyE2inZHyUUO1DZMC_CgkRABVaaEHuWQFrjj/exec",  //done
-    guestRequest: "https://script.google.com/macros/s/AKfycbxm-PwFLbaBLvWPX8fRYL6-enzyqOO-2IW8TUb2DZx64l_vrWTwi1wlD0xUudYIFSc/exec",   //done
-    entourage: "https://script.google.com/macros/s/AKfycbxDOKE0Vfc8YX_BuXvVrzJ6mP-tCSpLJnHbCVBbG1v9blZ6UqlrhNnXZ-mqKT4iXUtx/exec",  //done
-    sponsors: "https://script.google.com/macros/s/AKfycbzUqYZ4Ez0gn__Smht7BC3QfMABAx9aMGSvYCGp2svzSXbGs4tsSpNB6LHLgU5awB1w/exec",  //done 
-    proposalResponses: "https://script.google.com/macros/s/AKfycbw4sSBs5sR99p7hHNPsUQru6MksPmrppUXUDMhK3zlQ1jXU7UZ3BmGK1KrsgT9qcZCe/exec", // uses entourage script with action: proposal
-    weddingDetails: "https://script.google.com/macros/s/AKfycbwZQqnKSrcLu_vc6ATF_Tcd2xvw_vYSsf4NqRId_Mjk8h6EIDtKRHdQaBmTF1vMmO57/exec",   //done
+    messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSeZyqdEWHbpTcUO_ZxuZ9NyhJRgWxVAm2ex97M24LAS7lNmRQ/formResponse",   //done
+    message: "https://script.google.com/macros/s/AKfycbyNq1rbdZ-rn_MUp7K0f7DK90V0vbQ2H0I-cuBjJOOWJn0dTD3AvXsJaRQtzLqic2j9Wg/exec",  //done
+    guestList: "https://script.google.com/macros/s/AKfycbzTCWBhcqT5dwT11LdsnCIumD5RbDacZjuP86VCrDr7o8If-31cWhczoi3wAhczrMt5RA/exec",  //done
+    guestRequest: "https://script.google.com/macros/s/AKfycbw3nG0aqPVQQkloycJlC1klLMoHHHMdk3N2Bw3rL0j6sDFlVf_opxuSMgrjoXnv7SJr9Q/exec",   //done
+    entourage: "https://script.google.com/macros/s/AKfycbw9Xvit2LuVPMVfbvPAwZzy_g2yyB3axRLKt7DYINeriwSsmAw-ZcBfMSGeOpvc2pFp6A/exec",  //done
+    sponsors: "https://script.google.com/macros/s/AKfycbxOesICKCBZtXoejxd06pLAeBIst3o4wlKOI9HJ5QVRVNeS2fppDXV1o99-YMndSHB0JQ/exec",  //done 
+    proposalResponses: "https://script.google.com/macros/s/AKfycbyLYCJjoP7-QHfpA35rl5W2b-AySiPtw2bU64heq-VHA4OCNjUD319z9X70qoomMJKuKQ/exec", // uses entourage script with action: proposal
+    weddingDetails: "https://script.google.com/macros/s/AKfycbzlF9oLKi-CrcY66Z6i55wrW9-NF0UJUDZutw_KGEkuZJIf7do-1TLOYCijjYA18N6QSg/exec",   //done
 ////google share 
-    googleShare: "https://docs.google.com/spreadsheets/d/1LzwyRloGBdhylHiOTwjakkbWqLp8jFmmVLfdTJA8OJs/edit?usp=sharing", 
+    googleShare: "https://docs.google.com/spreadsheets/d/1YyCJqiMRftgt6Z2Qzcz0usQIPvnQdCbwoAXAU3yaDsc/edit?usp=sharing", 
   },
   wedding: {
     date: "October 18, 2026",
