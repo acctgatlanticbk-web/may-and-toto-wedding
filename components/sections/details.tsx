@@ -182,7 +182,7 @@ const attireGuide = {
     },
     gentlemen: {
       colors: ["#1A1A1A", "#FFFFFF", "#4A4A4A", "#C9CDD2", "#F8F6F2"] as const,
-      description: "Black suit with black trousers",
+      description: "Black suit with black trousers (no necktie required) ",
     },
   },
 } as const
@@ -928,11 +928,16 @@ export function Details() {
               {/* Dress Code Reminder */}
               <div className="rounded-lg border p-4 shadow-sm sm:p-5 md:p-6" style={softPanelStyle}>
                 <h4 className={`${cinzel.className} ${ct.reminderHead} mb-2 font-semibold sm:mb-3`} style={{ color: detailText.heading }}>
-                Dress Code
+                Strictly Formal
                 </h4>
-                <p className={`font-goudy-italic ${ct.reminderBody} leading-relaxed`} style={{ color: detailText.body }}>
-                STRICTLY FORMAL. No casual clothes and no wearing white dress
-                </p>
+                <div className={`font-goudy-italic ${ct.reminderBody} space-y-3 leading-relaxed`} style={{ color: detailText.body }}>
+                  <p>
+                    Kindly follow our suggested attire and color palette below to match our wedding theme.
+                  </p>
+                  <p>
+                    Strictly no casual clothes, shoes, or white-colored attire.
+                  </p>
+                </div>
               </div>
 
               {/* Arrival Reminder */}
