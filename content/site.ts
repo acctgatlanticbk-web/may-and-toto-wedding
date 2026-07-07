@@ -40,7 +40,7 @@ export const siteConfig = {
   },
   details: {
     rsvp: {
-      deadline: "August 18, 2026",
+      deadline: "August 30, 2026",
       coordinator: "GO Events",
       phone: "0916 872 7621",
     },
@@ -85,7 +85,7 @@ export const siteConfig = {
     image: ["/Details/reception.png", "/Details/reception2.png", "/Details/reception3.png"],
   },
   dressCode: {
-      theme: "SEMI-FORMAL",
+      theme: "STRICTLY FORMAL",
     colors: "#BBCED5, #B9C3A8, #F3D8C5, #D1C4D4, #ECD8BA, #F4E8D8, #E1DCCF",
     sponsors: {
       photo: "/Details/sponsors-new.png",
