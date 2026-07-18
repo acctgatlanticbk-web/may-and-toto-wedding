@@ -134,11 +134,11 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   playlist: {
     title: "A Playlist from our hearts",
     subtitle: "Songs that have been part of our journey together",
-    playlistName: "John & Alexandria Wedding",
+    playlistName: "Toto & May Wedding",
     embedUrl:
-    //"https://open.spotify.com/embed/playlist/4fr1yyG0dA8rAnhYTQxECe?utm_source=generator&si=32898d38071f43ba
-      "https://open.spotify.com/embed/playlist/1uW1JmEJKE2NedlTFzK5zi?utm_source=generator&si=32898d38071f43ba",
-    spotifyUrl: "https://open.spotify.com/playlist/1uW1JmEJKE2NedlTFzK5zi",
+    //https://open.spotify.com/embed/playlist/3L2IhO6I104rZIYVCEyncJ?utm_source=generator&theme=0&si=8b59b4d481114785
+      "https://open.spotify.com/embed/playlist/3L2IhO6I104rZIYVCEyncJ?utm_source=generator&theme=0&si=8b59b4d481114785",
+    spotifyUrl: "https://open.spotify.com/playlist/3L2IhO6I104rZIYVCEyncJ",
   },
   snapShare: {
     googleDriveLink:
