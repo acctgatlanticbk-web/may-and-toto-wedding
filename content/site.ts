@@ -73,7 +73,7 @@ export const siteConfig = {
     time: "4:00 PM",
     entourageTime: "3:00 PM",
     guestsTime: "3:30 PM",
-    image: ["/Details/ceremony.png", "/Details/ceremony2.png", "/Details/ceremony3.png"],
+    image: ["/Details/ceremony.webp", "/Details/ceremony2.webp", "/Details/ceremony3.webp"],
   },
   reception: {
     location: "Primus Hotel and Resort - Peñafrancia Hall",
