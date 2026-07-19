@@ -13,10 +13,10 @@ interface LoadingScreenProps {
 const COUNTDOWN_BOXES = [
   { src: '/gallery-design/box (1).jpg' },
   { src: '/gallery-design/box (2).jpg' },
-  { src: '/gallery-design/box (3).jpg' }
+  { src: '/gallery-design/box (4).jpg' }
 ];
 
-const MAIN_BW_IMAGE = '/mobile-background/couples (6).webp';
+const MAIN_BW_IMAGE = '/mobile-background/couples (13).png';
 const DESKTOP_BW_IMAGE = '/desktop-background/couples (10).webp';
 const STAGGER_DELAY_MS = 4000; // Each image appears every 4 seconds
 const BOX_TRANSITION_MS = 1200; // Slow, smooth transition

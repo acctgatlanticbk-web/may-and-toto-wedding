@@ -3,6 +3,7 @@
 import localFont from "next/font/local"
 import { motion } from "motion/react"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { sectionType, welcomeTitleSize } from "@/lib/section-typography"
 import { Cinzel } from "next/font/google"
 
 const cinzel = Cinzel({
@@ -54,7 +55,7 @@ function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
     <div className="flex items-center justify-center gap-2.5 pt-1 sm:gap-3.5 sm:pt-1.5">
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
-        className={`${cinzel.className} shrink-0 py-0.5 text-[0.5625rem] font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:text-[0.6rem] min-[400px]:tracking-[0.38em] sm:text-[0.625rem] sm:tracking-[0.44em]`}
+        className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
         style={{ color: "var(--color-welcome-navy)" }}
       >
         {groom}
@@ -89,14 +90,14 @@ function LayeredWelcomeTitle() {
       className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--welcome-size": "clamp(2.3rem, 11.5vw, 6.85rem)",
-          "--script-size": "clamp(1.28rem, 5.3vw, 3.2rem)",
-          "--script-overlap": "clamp(-0.9rem, -3.8vw, -2.2rem)",
+          "--welcome-size": welcomeTitleSize.main,
+          "--script-size": welcomeTitleSize.script,
+          "--script-overlap": welcomeTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--welcome-size)",
           color: "var(--color-welcome-navy)",
@@ -140,7 +141,7 @@ export function Welcome() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.65, ease: [0.22, 0.61, 0.36, 1] }}
-          className="relative min-w-0 overflow-visible rounded-lg border px-4 pt-6 pb-10 sm:rounded-xl sm:px-7 sm:pt-7 sm:pb-12 md:rounded-2xl md:px-8 md:pt-8 md:pb-14"
+          className="relative min-w-0 overflow-visible rounded-lg border px-4 pt-6 pb-10 @container/welcome sm:rounded-xl sm:px-7 sm:pt-7 sm:pb-12 md:rounded-2xl md:px-8 md:pt-8 md:pb-14"
           style={{
             background: "var(--color-welcome-bg)",
             borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
@@ -160,7 +161,7 @@ export function Welcome() {
           />
 
           {/* Header */}
-          <header className="relative overflow-visible space-y-3 px-2 pt-4 pb-6 sm:space-y-3.5 sm:px-3 sm:pt-5 sm:pb-7 md:space-y-4 md:pt-6 md:pb-8">
+          <header className="relative overflow-visible space-y-3 px-1 pt-4 pb-6 sm:space-y-3.5 sm:px-2 sm:pt-5 sm:pb-7 md:space-y-4 md:pt-6 md:pb-8">
             <CoupleLabel groom={groomName} bride={brideName} />
             <LayeredWelcomeTitle />
             <div className="pt-2 sm:pt-2.5">
@@ -180,14 +181,14 @@ export function Welcome() {
             >
               <blockquote>
                 <p
-                  className="font-goudy-italic text-[0.8125rem] leading-snug sm:text-[0.875rem] md:text-[0.9375rem]"
+                  className={`font-goudy-italic ${sectionType.textSnug}`}
                   style={{ color: "var(--color-welcome-text)" }}
                 >
                   &ldquo;He has made everything beautiful in its time.&rdquo;
                 </p>
                 <figcaption className="mt-2 sm:mt-2.5">
                   <cite
-                    className={`${cinzel.className} text-[0.5625rem] not-italic uppercase tracking-[0.2em] sm:text-[0.5875rem] sm:tracking-[0.24em]`}
+                    className={`${cinzel.className} ${sectionType.label} not-italic uppercase tracking-[0.2em] sm:tracking-[0.24em]`}
                     style={{ color: "var(--color-welcome-heading)" }}
                   >
                     Ecclesiastes 3:11
@@ -198,7 +199,7 @@ export function Welcome() {
 
             {/* Body */}
             <div
-              className="font-goudy-italic space-y-3 px-1 text-center text-[0.8125rem] leading-[1.62] sm:space-y-3.5 sm:px-2 sm:text-[0.875rem] sm:leading-[1.65] md:space-y-4 md:text-[0.9375rem]"
+              className={`font-goudy-italic space-y-3 px-1 text-center sm:space-y-3.5 sm:px-2 md:space-y-4 ${sectionType.textRelaxed}`}
               style={{ color: "var(--color-welcome-text)" }}
             >
               <p>
@@ -231,7 +232,7 @@ export function Welcome() {
               >
                 <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-center sm:gap-2.5">
                   <p
-                    className={`${cinzel.className} shrink-0 text-[0.5625rem] font-semibold uppercase tracking-[0.18em] sm:text-[0.5875rem] sm:tracking-[0.22em]`}
+                    className={`${cinzel.className} ${sectionType.label} shrink-0 font-semibold uppercase tracking-[0.18em] sm:tracking-[0.22em]`}
                     style={{ color: "var(--color-welcome-heading)" }}
                   >
                     Share in our joy
@@ -240,7 +241,7 @@ export function Welcome() {
                     ·
                   </span>
                   <p
-                    className="font-goudy-italic text-[0.8125rem] leading-snug sm:text-[0.875rem]"
+                    className={`font-goudy-italic ${sectionType.textSnug}`}
                     style={{ color: "var(--color-welcome-navy)" }}
                   >
                     {siteConfig.snapShare.hashtag.join(" ")}
@@ -251,7 +252,7 @@ export function Welcome() {
               {/* Sign-off */}
               <footer className="space-y-2 px-1 pt-4 pb-2 sm:space-y-2.5 sm:px-2 sm:pt-5 sm:pb-3 md:pt-6 md:pb-4">
                 <p
-                  className={`${aboveTheBeyond.className} text-[1.4rem] leading-none min-[400px]:text-[1.55rem] sm:text-[1.75rem] md:text-[1.95rem]`}
+                  className={`${aboveTheBeyond.className} ${sectionType.script}`}
                   style={{
                     color: "var(--color-welcome-green)",
                     textShadow:
@@ -261,7 +262,7 @@ export function Welcome() {
                   With all our love,
                 </p>
                 <p
-                  className={`${cinzel.className} mb-3 text-[0.75rem] font-semibold tracking-[0.12em] sm:mb-4 sm:text-[0.8125rem] sm:tracking-[0.16em] md:mb-5 md:text-[0.9375rem] md:tracking-[0.18em]`}
+                  className={`${cinzel.className} ${sectionType.subheader} mb-3 font-semibold tracking-[0.12em] sm:mb-4 sm:tracking-[0.16em] md:mb-5 md:tracking-[0.18em]`}
                   style={{ color: "var(--color-welcome-navy)" }}
                 >
                   {groomName} &amp; {brideName}

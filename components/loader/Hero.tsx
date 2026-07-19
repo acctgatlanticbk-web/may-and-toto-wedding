@@ -51,6 +51,7 @@ const mobileImages: string[] = [
 '/mobile-background/couples (5).webp',
 '/mobile-background/couples (6).webp',
 '/mobile-background/couples (12).webp',
+'/mobile-background/couples( (14).png',
 
 ];
 

@@ -5,6 +5,7 @@ import { motion } from "motion/react"
 import localFont from "next/font/local"
 import { Instagram, Twitter, Facebook, Music2 } from "lucide-react"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { sectionType } from "@/lib/section-typography"
 import { Cinzel } from "next/font/google"
 import Image from "next/image"
 
@@ -41,11 +42,11 @@ const dividerLineStyle = {
 } as const
 
 const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  title: "text-lg sm:text-xl md:text-2xl lg:text-3xl",
-  cardTitle: "text-sm sm:text-base md:text-lg",
+  label: sectionType.label,
+  body: sectionType.text,
+  bodyLg: sectionType.textRelaxed,
+  title: `${sectionType.subheader} lg:text-3xl`,
+  cardTitle: sectionType.subheader,
 } as const
 
 const cardStyle = {
@@ -82,7 +83,7 @@ const toTitleCase = (str: string) =>
 function FooterCoupleNames({ groom, bride }: { groom: string; bride: string }) {
   return (
     <h2
-      className={`${cinzel.className} mx-auto whitespace-nowrap text-center text-[clamp(1.125rem,4vw,2rem)] font-semibold tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em]`}
+      className={`${cinzel.className} mx-auto whitespace-nowrap text-center ${sectionType.subheader} font-semibold tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.18em]`}
       style={{ color: "var(--color-welcome-navy)" }}
     >
       {groom}
@@ -279,7 +280,7 @@ export function Footer() {
           <div className="mt-4 max-w-md text-center sm:mt-5 md:mt-6">
             {/* <FooterCoupleNames groom={groomName} bride={brideName} /> */}
             {/* <p
-              className="font-goudy-italic mt-2 text-[0.75rem] leading-[1.62] sm:mt-3 sm:text-[0.8125rem] md:text-[0.84375rem]"
+              className={`font-goudy-italic mt-2 sm:mt-3 ${sectionType.text}`}
               style={{ color: "var(--color-welcome-text)" }}
             >
               {ceremonyDate}
@@ -291,7 +292,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pb-4 sm:pb-6 min-w-0">
+        <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-4 @container/footer sm:px-6 md:px-8 pb-4 sm:pb-6 min-w-0">
           <motion.div
             className="grid grid-cols-1 lg:grid-cols-4 gap-5 sm:gap-6 md:gap-8 mb-8 sm:mb-10 items-start"
             variants={staggerChildren}
@@ -321,7 +322,7 @@ export function Footer() {
                   A Note From Us
                 </p>
                 <blockquote
-                  className={`font-goudy-italic ${ct.bodyLg} min-h-[4.5rem] leading-relaxed sm:min-h-[5rem]`}
+                  className={`font-goudy-italic ${ct.bodyLg} min-h-[4.5rem] sm:min-h-[5rem]`}
                   style={{ color: palette.body }}
                 >
                   &ldquo;{displayedText}
@@ -386,7 +387,7 @@ export function Footer() {
                 </h4>
                 <div className="space-y-2">
                   <DetailRow label="Please respond by" value={siteConfig.details.rsvp.deadline} />
-                  <p className={`font-goudy-italic ${ct.body} leading-relaxed opacity-90`} style={{ color: palette.body }}>
+                  <p className={`font-goudy-italic ${ct.body} opacity-90`} style={{ color: palette.body }}>
                     Please confirm your attendance by this date.
                   </p>
                 </div>
@@ -432,7 +433,7 @@ export function Footer() {
 
               <div>
                 <h5
-                  className={`${cinzel.className} ${ct.body} font-semibold mb-2.5 sm:mb-3 uppercase tracking-[0.1em]`}
+                  className={`${cinzel.className} ${ct.label} font-semibold mb-2.5 sm:mb-3 uppercase tracking-[0.14em]`}
                   style={{ color: palette.label }}
                 >
                   Quick Links
@@ -442,7 +443,7 @@ export function Footer() {
                     <a
                       key={item.href}
                       href={item.href}
-                      className={`font-goudy-italic block ${ct.body} leading-relaxed transition-colors duration-200 hover:opacity-80`}
+                      className={`font-goudy-italic block ${ct.body} transition-colors duration-200 hover:opacity-80`}
                       style={{ color: palette.body }}
                     >
                       {item.label}
@@ -463,11 +464,11 @@ export function Footer() {
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6">
               <div className="text-center md:text-left min-w-0">
-                <p className={`font-goudy-italic ${ct.body} leading-relaxed`} style={{ color: palette.body }}>
+                <p className={`font-goudy-italic ${ct.body}`} style={{ color: palette.body }}>
                   © {year} {coupleDisplayName} — crafted with love, prayers, and gratitude.
                 </p>
                 <p
-                  className={`font-goudy-italic ${ct.body} mt-1 leading-relaxed opacity-90`}
+                  className={`font-goudy-italic ${ct.body} mt-1 opacity-90`}
                   style={{ color: palette.body }}
                 >
                   This celebration site was designed to share our story and joy with you.

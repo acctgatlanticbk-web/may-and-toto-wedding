@@ -22,6 +22,7 @@ const mobileBackgroundSrcs: readonly string[] = [
 '/mobile-background/couples (9).webp',
 '/mobile-background/couples (6).webp',
 '/mobile-background/couples (8).webp',
+'/mobile-background/couples( (14).png',
 ]
 
 const SHOW_BUTTERFLIES = false

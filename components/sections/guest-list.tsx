@@ -20,6 +20,7 @@ import {
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { modalTitleSize, sectionType, welcomeTitleSize } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -63,16 +64,14 @@ const innerSurfaceStyle = {
   borderColor: "color-mix(in srgb, var(--color-motif-deep) 10%, transparent)",
 } as const
 
-const modalInputClass =
-  "w-full rounded-lg border bg-white px-2.5 py-1.5 font-goudy-italic text-xs transition-all duration-300 focus:ring-2 focus:ring-[color-mix(in_srgb,var(--color-welcome-green)_25%,transparent)] sm:px-3 sm:py-2 sm:text-sm"
+const modalInputClass = `w-full rounded-lg border bg-white px-2.5 py-1.5 font-goudy-italic ${sectionType.text} transition-all duration-300 focus:ring-2 focus:ring-[color-mix(in_srgb,var(--color-welcome-green)_25%,transparent)] sm:px-3 sm:py-2`
 
 const modalInputStyle = {
   borderColor: "color-mix(in srgb, var(--color-motif-deep) 14%, transparent)",
   color: palette.heading,
 } as const
 
-const modalLabelClass =
-  "font-goudy-italic mb-1.5 flex flex-wrap items-center gap-1.5 text-xs font-semibold sm:mb-2 sm:gap-2 sm:text-sm"
+const modalLabelClass = `font-goudy-italic mb-1.5 flex flex-wrap items-center gap-1.5 ${sectionType.text} font-semibold sm:mb-2 sm:gap-2`
 
 const dividerLineStyle = {
   background:
@@ -453,7 +452,7 @@ export function GuestList() {
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-30 bg-transparent py-6 sm:py-10 md:py-12 lg:py-16`}
     >
       {/* Header */}
-      <div className="relative z-10 mb-4 px-2 text-center sm:mb-6 sm:px-3 md:mb-8 md:px-4 lg:mb-10">
+      <div className="relative z-10 mx-auto mb-4 max-w-5xl px-2 text-center @container/guest-list sm:mb-6 sm:px-3 md:mb-8 md:px-4 lg:mb-10">
         {/* Ornamental divider */}
         <div className="mx-auto mb-5 flex items-center justify-center gap-1.5 sm:mb-6 md:mb-7">
           <span className="h-px w-6 sm:w-10" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.55), transparent)" }} />
@@ -463,17 +462,17 @@ export function GuestList() {
 
         {/* Title block */}
         <div
-          className="relative mx-auto mt-2 w-full max-w-full text-center sm:mt-3 md:mt-4"
+          className="welcome-title-lockup relative mx-auto mt-2 w-full max-w-full text-center sm:mt-3 md:mt-4"
           style={
             {
-              "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-              "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-              "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
-            } as React.CSSProperties
+              "--title-size": welcomeTitleSize.main,
+              "--script-size": welcomeTitleSize.script,
+              "--script-overlap": welcomeTitleSize.overlap,
+            } as CSSProperties
           }
         >
           <span
-            className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+            className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
             style={{ fontSize: "var(--title-size)", color: OUTSIDE_TEXT, textShadow: OUTSIDE_TITLE_SHADOW }}
           >
             RSVP
@@ -494,17 +493,17 @@ export function GuestList() {
 
         {/* Subtitle block */}
         <div className="mx-auto mt-5 max-w-xl space-y-2 px-2 sm:mt-6 sm:space-y-3">
-          <p className={`font-goudy-italic text-xs leading-relaxed sm:text-sm md:text-base`} style={{ color: OUTSIDE_TEXT_MUTED }}>
+          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: OUTSIDE_TEXT_MUTED }}>
             To help us plan a beautiful and intimate celebration, we kindly ask that you confirm your
             attendance. Please search for your name below to confirm your presence at our special day.
           </p>
-          <p className={`font-goudy-italic text-xs leading-relaxed sm:text-sm md:text-base`} style={{ color: OUTSIDE_TEXT_MUTED }}>
+          <p className={`font-goudy-italic ${sectionType.textRelaxed}`} style={{ color: OUTSIDE_TEXT_MUTED }}>
             If we do not receive your response by the deadline, we will assume you are unable to attend.
           </p>
-          <p className={`${cinzel.className} text-xs font-semibold tracking-wide sm:text-sm`} style={{ color: OUTSIDE_TEXT }}>
+          <p className={`${cinzel.className} ${sectionType.text} font-semibold tracking-wide`} style={{ color: OUTSIDE_TEXT }}>
             RSVP Deadline: {siteConfig.details.rsvp.deadline}
           </p>
-          <p className={`${cinzel.className} text-xs font-semibold tracking-wide sm:text-sm`} style={{ color: OUTSIDE_TEXT }}>
+          <p className={`${cinzel.className} ${sectionType.text} font-semibold tracking-wide`} style={{ color: OUTSIDE_TEXT }}>
             Coordinator: {siteConfig.details.rsvp.coordinator} · {siteConfig.details.rsvp.phone}
           </p>
         </div>
@@ -534,10 +533,10 @@ export function GuestList() {
                   <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-white" />
                 </div>
                 <div>
-                  <label className="block text-xs sm:text-sm md:text-base font-semibold font-sans mb-0.5 sm:mb-1" style={{ color: "var(--color-welcome-navy)" }}>
+                  <label className={`block ${sectionType.text} font-semibold font-sans mb-0.5 sm:mb-1`} style={{ color: "var(--color-welcome-navy)" }}>
                     Find Your Name
                   </label>
-                  <p className="text-[10px] sm:text-xs font-sans" style={{ color: "var(--color-welcome-text)" }}>
+                  <p className={`${sectionType.label} font-sans`} style={{ color: "var(--color-welcome-text)" }}>
                     Type as you search to see instant results
                   </p>
                 </div>
@@ -580,7 +579,7 @@ export function GuestList() {
                             {guest.Name}
                           </div>
                           {guest.Email && guest.Email !== "Pending" && (
-                            <div className="text-[10px] sm:text-xs text-motif-medium/80 truncate mt-0.5">
+                            <div className={`${sectionType.label} text-motif-medium/80 truncate mt-0.5`}>
                               {guest.Email}
                             </div>
                           )}
@@ -611,7 +610,7 @@ export function GuestList() {
                         </div>
                         <div className="flex-1">
                           <h4 className="font-semibold text-xs sm:text-sm text-motif-deep mb-1">Not finding your name?</h4>
-                          <p className="text-[10px] sm:text-xs text-motif-medium leading-relaxed">
+                          <p className={`${sectionType.label} text-motif-medium leading-relaxed`}>
                             We'd love to have you with us! Send a request to join the celebration.
                           </p>
                         </div>
@@ -621,7 +620,7 @@ export function GuestList() {
                           setRequestFormData({ ...requestFormData, Name: searchQuery })
                           setShowRequestModal(true)
                         }}
-                        className="w-full !bg-motif-deep hover:!bg-motif-deep/90 text-white py-2 sm:py-2.5 rounded-lg text-xs sm:text-sm font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center"
+                        className={`w-full !bg-motif-deep hover:!bg-motif-deep/90 text-white py-2 sm:py-2.5 rounded-lg ${sectionType.text} font-semibold shadow-md transition-all duration-300 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center`}
                       >
                         <UserPlus className="h-3 w-3 mr-1.5 sm:mr-2 inline" />
                         Request to Join
@@ -642,7 +641,7 @@ export function GuestList() {
           onClick={handleCloseModal}
         >
           <div
-            className="relative mx-1 flex max-h-[95vh] w-full max-w-md flex-col overflow-hidden rounded-xl animate-in zoom-in-95 duration-300 sm:mx-2 sm:max-w-lg sm:rounded-2xl md:mx-4"
+            className="relative mx-1 flex max-h-[95vh] w-full max-w-md flex-col overflow-hidden rounded-xl animate-in zoom-in-95 duration-300 @container/guest-modal sm:mx-2 sm:max-w-lg sm:rounded-2xl md:mx-4"
             style={modalCardStyle}
             onClick={(e) => e.stopPropagation()}
           >
@@ -675,17 +674,17 @@ export function GuestList() {
               </div>
 
               <h3
-                className="relative mx-auto w-full max-w-full text-center"
+                className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
                 style={
                   {
-                    "--title-size": "clamp(1.45rem, 5vw, 2.25rem)",
-                    "--script-size": "clamp(1rem, 3.5vw, 1.65rem)",
-                    "--script-overlap": "clamp(-0.55rem, -2.2vw, -1rem)",
+                    "--title-size": modalTitleSize.main,
+                    "--script-size": modalTitleSize.script,
+                    "--script-overlap": modalTitleSize.overlap,
                   } as CSSProperties
                 }
               >
                 <span
-                  className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em]`}
+                  className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em]`}
                   style={{ fontSize: "var(--title-size)", color: palette.heading }}
                 >
                   You are Invited
@@ -706,14 +705,14 @@ export function GuestList() {
               </h3>
 
               <p
-                className="font-goudy-italic mx-auto mt-4 max-w-md text-[0.75rem] leading-snug sm:mt-5 sm:text-[0.8125rem] md:text-[0.84375rem]"
+                className={`font-goudy-italic mx-auto mt-4 max-w-md sm:mt-5 ${sectionType.textSnug}`}
                 style={{ color: palette.body }}
               >
                 Hello <span style={{ color: palette.heading }}>{selectedGuest?.Name}</span>, you are
                 invited to our wedding!
               </p>
               <p
-                className="font-goudy-italic mx-auto mt-2 text-[0.7rem] leading-snug sm:text-xs"
+                className={`font-goudy-italic mx-auto mt-2 ${sectionType.text}`}
                 style={{ color: palette.body }}
               >
                 We&apos;ve reserved{" "}
@@ -735,13 +734,13 @@ export function GuestList() {
                       <CheckCircle className="h-6 w-6 text-white sm:h-7 sm:w-7 md:h-8 md:w-8" />
                     </div>
                     <h4
-                      className={`${theSeasons.className} mb-2 text-base uppercase tracking-[0.12em] sm:text-lg md:text-xl`}
+                      className={`${theSeasons.className} mb-2 uppercase tracking-[0.12em] sm:text-lg md:text-xl ${sectionType.subheader}`}
                       style={{ color: palette.heading }}
                     >
                       Thank You for Responding!
                     </h4>
                     <p
-                      className="font-goudy-italic mb-4 px-2 text-[0.75rem] sm:text-xs md:text-sm"
+                      className={`font-goudy-italic mb-4 px-2 ${sectionType.text}`}
                       style={{ color: palette.body }}
                     >
                       We&apos;ve received your RSVP and look forward to celebrating with you!
@@ -772,7 +771,7 @@ export function GuestList() {
                         <div className="rounded-lg border p-2.5 sm:p-3" style={innerSurfaceStyle}>
                           <div className="text-center">
                             <p
-                              className="font-goudy-italic mb-1 text-[10px] font-medium sm:text-xs"
+                              className={`font-goudy-italic mb-1 ${sectionType.label} font-medium`}
                               style={{ color: palette.label }}
                             >
                               Number of Guests
@@ -789,7 +788,7 @@ export function GuestList() {
                       {selectedGuest && selectedGuest.Message && selectedGuest.Message.trim() !== "" && (
                         <div className="border-t pt-2" style={{ borderColor: innerSurfaceStyle.borderColor }}>
                           <p
-                            className="font-goudy-italic px-1 text-[10px] italic sm:text-xs"
+                            className={`font-goudy-italic px-1 ${sectionType.label} italic`}
                             style={{ color: palette.body }}
                           >
                             &ldquo;{selectedGuest.Message}&rdquo;
@@ -799,7 +798,7 @@ export function GuestList() {
                     </div>
                     <button
                       onClick={handleCloseModal}
-                      className={`${cinzel.className} mt-4 rounded-sm border px-6 py-2.5 text-[0.625rem] font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:mt-5 sm:px-8 sm:py-3 sm:text-[0.6875rem] md:mt-6`}
+                      className={`${cinzel.className} mt-4 rounded-sm border px-6 py-2.5 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md sm:mt-5 sm:px-8 sm:py-3 md:mt-6`}
                       style={{
                         backgroundColor: palette.accent,
                         borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -895,7 +894,7 @@ export function GuestList() {
                           <span>Who&apos;s Coming With You?</span>
                         </label>
                         <p
-                          className="font-goudy-italic -mt-1 text-[10px] sm:-mt-1.5 sm:text-xs"
+                          className={`font-goudy-italic -mt-1 sm:-mt-1.5 ${sectionType.label}`}
                           style={{ color: palette.body }}
                         >
                           Please provide names and relationships for your{" "}
@@ -913,7 +912,7 @@ export function GuestList() {
                             <div className="mb-1 flex items-center gap-1.5 sm:mb-1.5">
                               <User className="h-3 w-3 sm:h-3.5 sm:w-3.5" style={{ color: palette.accent }} />
                               <span
-                                className="font-goudy-italic text-[10px] font-semibold sm:text-xs"
+                                className={`font-goudy-italic ${sectionType.label} font-semibold`}
                                 style={{ color: palette.heading }}
                               >
                                 Guest {index + 2}
@@ -922,7 +921,7 @@ export function GuestList() {
                             <div className="space-y-1.5 sm:space-y-2">
                               <div>
                                 <label
-                                  className="font-goudy-italic mb-1 block text-[10px] font-medium sm:text-xs"
+                                  className={`font-goudy-italic mb-1 block ${sectionType.label} font-medium`}
                                   style={{ color: palette.label }}
                                 >
                                   Full Name
@@ -942,7 +941,7 @@ export function GuestList() {
                               </div>
                               <div>
                                 <label
-                                  className="font-goudy-italic mb-1 block text-[10px] font-medium sm:text-xs"
+                                  className={`font-goudy-italic mb-1 block ${sectionType.label} font-medium`}
                                   style={{ color: palette.label }}
                                 >
                                   Relationship with {selectedGuest?.Name || "Primary Guest"}
@@ -973,7 +972,7 @@ export function GuestList() {
                       <label className={modalLabelClass} style={{ color: palette.heading }}>
                         <MessageSquare className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                         <span>Song Request</span>
-                        <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                        <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                           (Optional)
                         </span>
                       </label>
@@ -992,7 +991,7 @@ export function GuestList() {
                       <label className={modalLabelClass} style={{ color: palette.heading }}>
                         <Mail className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                         <span>Your Email Address</span>
-                        <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                        <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                           (Optional)
                         </span>
                       </label>
@@ -1011,7 +1010,7 @@ export function GuestList() {
                       <label className={modalLabelClass} style={{ color: palette.heading }}>
                         <Phone className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                         <span>Phone Number</span>
-                        <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                        <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                           (Optional)
                         </span>
                       </label>
@@ -1030,7 +1029,7 @@ export function GuestList() {
                       <button
                         type="submit"
                         disabled={isLoading}
-                        className={`${cinzel.className} flex w-full items-center justify-center gap-1.5 rounded-sm border py-2.5 text-[0.625rem] font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 sm:gap-2 sm:py-3 sm:text-[0.6875rem]`}
+                        className={`${cinzel.className} flex w-full items-center justify-center gap-1.5 rounded-sm border py-2.5 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 sm:gap-2 sm:py-3`}
                         style={{
                           backgroundColor: palette.accent,
                           borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -1060,7 +1059,7 @@ export function GuestList() {
                   <div className="bg-red-50 border-2 border-red-200 rounded-xl p-2 sm:p-2.5 md:p-3 lg:p-4">
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <AlertCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-red-600 flex-shrink-0" />
-                      <span className="text-red-600 font-semibold text-[10px] sm:text-xs md:text-sm">{error}</span>
+                      <span className={`text-red-600 font-semibold ${sectionType.text}`}>{error}</span>
                     </div>
                   </div>
                 </div>
@@ -1145,7 +1144,7 @@ export function GuestList() {
                         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" })
                       }, 100)
                     }}
-                    className={`${cinzel.className} mb-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border py-3 text-[10px] font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98]`}
+                    className={`${cinzel.className} mb-3 inline-flex w-full items-center justify-center gap-2 rounded-sm border py-3 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md active:scale-[0.98]`}
                     style={{
                       backgroundColor: palette.accent,
                       borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -1163,7 +1162,7 @@ export function GuestList() {
                       setSearchQuery("")
                       setSelectedGuest(null)
                     }}
-                    className="font-goudy-italic text-[11px] tracking-wide transition-colors duration-200"
+                    className={`font-goudy-italic ${sectionType.label} tracking-wide transition-colors duration-200`}
                     style={{ color: palette.body }}
                   >
                     Maybe later — close
@@ -1181,7 +1180,7 @@ export function GuestList() {
             onClick={handleCloseRequestModal}
           >
             <div
-              className="relative mx-1 flex max-h-[95vh] w-full max-w-md flex-col overflow-hidden rounded-xl animate-in zoom-in-95 duration-300 sm:mx-2 sm:max-w-lg sm:rounded-2xl md:mx-4"
+              className="relative mx-1 flex max-h-[95vh] w-full max-w-md flex-col overflow-hidden rounded-xl animate-in zoom-in-95 duration-300 @container/guest-modal sm:mx-2 sm:max-w-lg sm:rounded-2xl md:mx-4"
               style={modalCardStyle}
               onClick={(e) => e.stopPropagation()}
             >
@@ -1211,17 +1210,17 @@ export function GuestList() {
                 </div>
 
                 <h3
-                  className="relative mx-auto w-full max-w-full text-center"
+                  className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
                   style={
                     {
-                      "--title-size": "clamp(1.45rem, 5vw, 2.25rem)",
-                      "--script-size": "clamp(1rem, 3.5vw, 1.65rem)",
-                      "--script-overlap": "clamp(-0.55rem, -2.2vw, -1rem)",
+                      "--title-size": modalTitleSize.main,
+                      "--script-size": modalTitleSize.script,
+                      "--script-overlap": modalTitleSize.overlap,
                     } as CSSProperties
                   }
                 >
                   <span
-                    className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em]`}
+                    className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em]`}
                     style={{ fontSize: "var(--title-size)", color: palette.heading }}
                   >
                     Request to Join
@@ -1242,7 +1241,7 @@ export function GuestList() {
                 </h3>
 
                 <p
-                  className="font-goudy-italic mx-auto mt-4 max-w-md text-[0.75rem] leading-snug sm:mt-5 sm:text-[0.8125rem]"
+                  className={`font-goudy-italic mx-auto mt-4 max-w-md sm:mt-5 ${sectionType.textSnug}`}
                   style={{ color: palette.body }}
                 >
                   {requestFormData.Name ? (
@@ -1285,7 +1284,7 @@ export function GuestList() {
                     <label className={modalLabelClass} style={{ color: palette.heading }}>
                       <Mail className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                       <span>Email Address</span>
-                      <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                      <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                         (Optional)
                       </span>
                     </label>
@@ -1304,7 +1303,7 @@ export function GuestList() {
                     <label className={modalLabelClass} style={{ color: palette.heading }}>
                       <Phone className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                       <span>Phone Number</span>
-                      <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                      <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                         (Optional)
                       </span>
                     </label>
@@ -1341,7 +1340,7 @@ export function GuestList() {
                     <label className={modalLabelClass} style={{ color: palette.heading }}>
                       <MessageSquare className="h-3.5 w-3.5 flex-shrink-0 sm:h-4 sm:w-4" style={{ color: palette.accent }} />
                       <span>Message</span>
-                      <span className="text-[10px] font-normal sm:text-xs" style={{ color: palette.body }}>
+                      <span className={`${sectionType.label} font-normal`} style={{ color: palette.body }}>
                         (Optional)
                       </span>
                     </label>
@@ -1360,7 +1359,7 @@ export function GuestList() {
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className={`${cinzel.className} flex w-full items-center justify-center gap-1.5 rounded-sm border py-2.5 text-[0.625rem] font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 sm:gap-2 sm:py-3 sm:text-[0.6875rem]`}
+                      className={`${cinzel.className} flex w-full items-center justify-center gap-1.5 rounded-sm border py-2.5 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md disabled:opacity-70 sm:gap-2 sm:py-3`}
                       style={{
                         backgroundColor: palette.accent,
                         borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -1399,16 +1398,16 @@ export function GuestList() {
                     </div>
                     
                     {/* Title */}
-                    <h4 className="text-base sm:text-lg md:text-xl lg:text-2xl font-serif font-bold text-motif-deep mb-2 sm:mb-3">
+                    <h4 className={`mb-2 font-serif font-bold text-motif-deep sm:mb-3 ${sectionType.subheader}`}>
                       Request Sent!
                     </h4>
                     
                     {/* Message */}
                     <div className="space-y-1 sm:space-y-1.5 mb-2 sm:mb-3">
-                      <p className="text-motif-deep/95 text-xs sm:text-sm font-medium">
+                      <p className={`text-motif-deep/95 font-medium ${sectionType.text}`}>
                         We've received your request
                       </p>
-                      <p className="text-motif-deep/85 text-[10px] sm:text-xs">
+                      <p className={`text-motif-deep/85 ${sectionType.label}`}>
                         We'll review it and get back to you soon
                       </p>
                     </div>
@@ -1416,7 +1415,7 @@ export function GuestList() {
                     {/* Subtle closing indicator */}
                     <div className="flex items-center justify-center gap-1 sm:gap-1.5 mt-2 sm:mt-3">
                       <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-motif-deep/60 rounded-full animate-pulse" />
-                      <p className="text-motif-deep/70 text-[10px] sm:text-xs">
+                      <p className={`text-motif-deep/70 ${sectionType.label}`}>
                         This will close automatically
                       </p>
                       <div className="w-0.5 h-0.5 sm:w-1 sm:h-1 bg-motif-deep/60 rounded-full animate-pulse" />
@@ -1431,7 +1430,7 @@ export function GuestList() {
                   <div className="bg-red-50 border-2 border-red-200 rounded-xl p-2 sm:p-2.5 md:p-3 lg:p-4">
                     <div className="flex items-center gap-1.5 sm:gap-2">
                       <AlertCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-red-600 flex-shrink-0" />
-                      <span className="text-red-600 font-semibold text-[10px] sm:text-xs md:text-sm">{error}</span>
+                      <span className={`text-red-600 font-semibold ${sectionType.text}`}>{error}</span>
                     </div>
                   </div>
                 </div>
@@ -1446,7 +1445,7 @@ export function GuestList() {
           <div className="bg-green-50 border-2 border-green-200 rounded-xl p-2 sm:p-3 md:p-4 shadow-lg animate-in slide-in-from-top">
             <div className="flex items-center gap-1.5 sm:gap-2">
               <CheckCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4 md:h-5 md:w-5 text-green-600" />
-              <span className="text-green-600 font-semibold text-xs sm:text-sm md:text-base">{success}</span>
+              <span className={`text-green-600 font-semibold ${sectionType.text}`}>{success}</span>
             </div>
           </div>
         </div>

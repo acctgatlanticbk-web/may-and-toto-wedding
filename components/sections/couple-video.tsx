@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react"
 import { motion } from "motion/react"
 import { Play } from "lucide-react"
 import { useAudio } from "@/contexts/audio-context"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import localFont from "next/font/local"
 import Image from "next/image"
 import React from "react"
@@ -71,17 +72,17 @@ function OrnamentalDivider() {
 function CoupleVideoTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.2rem, 5vw, 2.5rem)",
-          "--script-overlap": "clamp(-0.75rem, -3.2vw, -1.75rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: palette.heading,
@@ -245,7 +246,7 @@ export function CoupleVideo() {
           /> */}
         </div>
 
-        <div className="relative z-20 mx-auto max-w-5xl">
+        <div className="relative z-20 mx-auto max-w-5xl @container/couple-video">
           {/* Header */}
           <div className="text-center">
             <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
@@ -255,7 +256,7 @@ export function CoupleVideo() {
               <CoupleVideoTitle />
             </div>
             <p
-              className="font-goudy-italic mx-auto mt-4 max-w-xl text-[0.75rem] leading-snug sm:mt-5 sm:text-[0.8125rem] md:mt-6 md:text-[0.84375rem]"
+              className={`font-goudy-italic mx-auto mt-4 max-w-xl sm:mt-5 md:mt-6 ${sectionType.textSnug}`}
               style={{ color: palette.body }}
             >
               Watch the journey that brought our hearts together
@@ -403,7 +404,7 @@ export function CoupleVideo() {
                 <OrnamentalDivider />
               </div>
               <p
-                className="font-goudy-italic mx-auto max-w-lg px-4 text-[0.75rem] leading-snug sm:text-[0.8125rem] md:text-[0.84375rem]"
+                className={`font-goudy-italic mx-auto max-w-lg px-4 ${sectionType.textSnug}`}
                 style={{ color: palette.heading }}
               >
                 A glimpse into the moments that made our hearts one

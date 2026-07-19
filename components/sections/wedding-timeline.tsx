@@ -3,6 +3,7 @@
 import type React from "react"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import type { SiteConfig } from "@/lib/site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import { MapPin } from "lucide-react"
 import { motion } from "motion/react"
 import { Cinzel } from "next/font/google"
@@ -74,17 +75,17 @@ function OutsideDivider() {
 function TimelineTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: OUTSIDE_TEXT,
@@ -199,7 +200,7 @@ export function WeddingTimeline() {
       />
 
       {/* Header */}
-      <div className="relative z-10 mb-8 px-3 text-center sm:mb-10 sm:px-4 md:mb-12">
+      <div className="relative z-10 mx-auto mb-8 max-w-5xl px-3 text-center @container/timeline sm:mb-10 sm:px-4 md:mb-12">
         <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
           <OutsideDivider />
         </div>
@@ -207,7 +208,7 @@ export function WeddingTimeline() {
           <TimelineTitle />
         </div>
         <p
-          className="font-goudy-italic mx-auto mt-4 max-w-xl px-2 text-xs leading-relaxed sm:mt-5 sm:text-sm md:mt-6 md:text-base"
+          className={`font-goudy-italic mx-auto mt-4 max-w-xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
           style={{ color: OUTSIDE_TEXT_MUTED }}
         >
           A simple overview of the key moments of our day, from arrival to farewell.
@@ -291,7 +292,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
         <div className={isEven ? "" : "text-right"}>
           <div className="flex items-center justify-end gap-3">
             {!isEven ? (
-              <TimelineText event={event} align="right" mobile />
+              <TimelineText event={event} align="right" />
             ) : (
               <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />
             )}
@@ -317,7 +318,7 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
               }}
             />
             {isEven ? (
-              <TimelineText event={event} align="left" mobile />
+              <TimelineText event={event} align="left" />
             ) : (
               <IconMark Icon={Icon} imageSrc={event.imageSrc} mobile />
             )}
@@ -331,28 +332,22 @@ function TimelineItem({ event, index }: { event: TimelineEvent; index: number })
 function TimelineText({
   event,
   align,
-  mobile,
 }: {
   event: TimelineEvent
   align: "left" | "right"
-  mobile?: boolean
 }) {
   const textAlign = align === "right" ? "text-right" : "text-left"
 
   return (
     <div className={`max-w-md ${textAlign} ${align === "right" ? "ml-auto" : "mr-auto"}`}>
       <p
-        className={`${cinzel.className} ${
-          mobile ? "text-[0.7rem]" : "text-[0.75rem] lg:text-sm"
-        } tracking-[0.22em] uppercase`}
+        className={`${cinzel.className} ${sectionType.label} tracking-[0.22em] uppercase`}
         style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
       >
         {event.title}
       </p>
       <p
-        className={`font-goudy-italic ${
-          mobile ? "text-[0.75rem]" : "text-sm lg:text-base"
-        } mt-0.5 opacity-95`}
+        className={`font-goudy-italic ${sectionType.textSnug} mt-0.5 opacity-95`}
         style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
       >
         at {event.time}
@@ -360,9 +355,7 @@ function TimelineText({
 
       {event.description && (
         <p
-          className={`font-goudy-italic ${
-            mobile ? "text-[10px]" : "text-xs lg:text-sm"
-          } mt-1.5 leading-relaxed opacity-90`}
+          className={`font-goudy-italic ${sectionType.textRelaxed} mt-1.5 opacity-90`}
           style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
         >
           {event.description}
@@ -378,7 +371,7 @@ function TimelineText({
             style={{ color: TIMELINE_TEXT, filter: ICON_SHADOW }}
           />
           <p
-            className={`font-goudy-italic ${mobile ? "text-[10px]" : "text-xs lg:text-sm"} leading-relaxed`}
+            className={`font-goudy-italic ${sectionType.text} leading-relaxed`}
             style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
           >
             {event.location}

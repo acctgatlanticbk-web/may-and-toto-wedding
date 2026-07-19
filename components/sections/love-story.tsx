@@ -1,15 +1,9 @@
 "use client"
 
 import React from "react"
-import Link from "next/link"
 import localFont from "next/font/local"
 import { StorySection } from "@/components/StorySection"
-import { Cinzel } from "next/font/google"
-
-const cinzel = Cinzel({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-})
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const theSeasons = localFont({
   src: "../../Font/Fontspring-DEMO-theseasons-reg.otf",
@@ -51,17 +45,17 @@ function OrnamentalDivider() {
 function LoveStoryTitle() {
   return (
     <h1
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.2rem, 5vw, 2.5rem)",
-          "--script-overlap": "clamp(-0.75rem, -3.2vw, -1.75rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: "var(--color-welcome-navy)",
@@ -110,7 +104,7 @@ export function LoveStory() {
             className={CORNER_DECO_CLASS}
           />
         </div>
-        <div className="relative z-20">
+        <div className="relative z-20 mx-auto max-w-5xl @container/love-story">
           <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
             <OrnamentalDivider />
           </div>
@@ -251,30 +245,20 @@ export function LoveStory() {
           <div className="mx-auto mb-5 sm:mb-6">
             <OrnamentalDivider />
           </div>
-          <Link
-            href="#guest-list"
-            className={`${cinzel.className} group relative inline-flex items-center justify-center rounded-sm border px-6 py-2.5 text-[0.625rem] font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:px-8 sm:py-3 sm:text-[0.6875rem] sm:tracking-[0.24em] md:px-10 md:py-3.5 md:text-xs md:tracking-[0.28em]`}
-            style={{
-              backgroundColor: "var(--color-welcome-green)",
-              borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
-              color: "var(--color-welcome-bg)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--color-welcome-navy)"
-              e.currentTarget.style.borderColor = "var(--color-welcome-green)"
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "var(--color-welcome-green)"
-              e.currentTarget.style.borderColor =
-                "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)"
-            }}
-          >
-            <span className="relative z-10">Join us</span>
-            <div
-              className="absolute inset-0 -z-0 rounded-sm opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-25"
-              style={{ backgroundColor: "var(--color-motif-deep)" }}
-            />
-          </Link>
+          <blockquote className="mx-auto max-w-xl px-2">
+            <p
+              className={`font-goudy-italic ${sectionType.textRelaxed} italic leading-relaxed`}
+              style={{ color: "var(--color-welcome-text)" }}
+            >
+              &ldquo;I have found the one whom my soul loves.&rdquo;
+            </p>
+            <footer
+              className={`font-goudy-italic mt-2 sm:mt-3 ${sectionType.label} not-italic tracking-wide`}
+              style={{ color: "var(--color-welcome-green)" }}
+            >
+              — Song of Solomon 3: 4
+            </footer>
+          </blockquote>
         </div>
       </div>
     </div>

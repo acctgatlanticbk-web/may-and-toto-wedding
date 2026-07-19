@@ -6,6 +6,7 @@ import localFont from "next/font/local"
 import { Instagram, Facebook, Twitter, Share2, Copy, Download, Check } from "lucide-react"
 import { QRCodeCanvas } from "qrcode.react"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import Image from "next/image"
 
 const cinzel = Cinzel({
@@ -49,11 +50,11 @@ const insideDividerLineStyle = {
 } as const
 
 const ct = {
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  label: "text-[11px] sm:text-xs md:text-sm",
-  cardTitle: "text-sm sm:text-base md:text-lg lg:text-xl",
-  btn: "text-[0.625rem] sm:text-[0.6875rem] md:text-xs",
+  body: sectionType.text,
+  bodyLg: sectionType.textRelaxed,
+  label: sectionType.label,
+  cardTitle: `${sectionType.subheader} lg:text-xl`,
+  btn: sectionType.label,
 } as const
 
 const cardStyle = {
@@ -102,17 +103,17 @@ function InsideDivider() {
 function SnapShareTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: OUTSIDE_TEXT,
@@ -301,7 +302,7 @@ export function SnapShare() {
       id="snap-share"
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 bg-transparent pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
     >
-      <div className="relative z-20 mx-auto max-w-6xl px-4 sm:px-6 md:px-8">
+      <div className="relative z-20 mx-auto max-w-6xl px-4 @container/snap-share sm:px-6 md:px-8">
         <div className="relative z-20 px-6 text-center sm:px-10 md:px-12">
           <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
             <OutsideDivider />
@@ -310,7 +311,7 @@ export function SnapShare() {
             <SnapShareTitle />
           </div>
           <p
-            className={`font-goudy-italic ${ct.bodyLg} mx-auto mt-4 max-w-2xl leading-relaxed px-2 sm:mt-5 md:mt-6`}
+            className={`font-goudy-italic mx-auto mt-4 max-w-2xl px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
             style={{ color: OUTSIDE_TEXT_MUTED, textShadow: READABLE_SHADOW }}
           >
             Help us remember the little moments of {coupleDisplayName}&apos;s day — every smile,
@@ -358,7 +359,7 @@ export function SnapShare() {
               </div>
             </div>
             <p
-              className={`font-goudy-italic ${ct.body} text-center leading-relaxed`}
+              className={`font-goudy-italic ${ct.body} text-center`}
               style={{ color: palette.body }}
             >
               Share your snapshots to be featured in our keepsake gallery.
@@ -374,7 +375,7 @@ export function SnapShare() {
                 Share Our Wedding Website
               </h4>
               <p
-                className={`font-goudy-italic ${ct.body} text-center leading-relaxed`}
+                className={`font-goudy-italic ${ct.body} text-center`}
                 style={{ color: palette.body }}
               >
                 Spread the word about {coupleDisplayName}&apos;s celebration. Share this QR code so
@@ -399,7 +400,7 @@ export function SnapShare() {
                 </PrimaryButton>
               </div>
               <p
-                className={`font-goudy-italic ${ct.body} text-center leading-relaxed`}
+                className={`font-goudy-italic ${ct.body} text-center`}
                 style={{ color: palette.body }}
               >
                 Scan with any camera app to open the full invitation and schedule.
@@ -434,7 +435,7 @@ export function SnapShare() {
                       {hashtag}
                     </span>
                     <span
-                      className={`${cinzel.className} flex flex-shrink-0 items-center gap-1 whitespace-nowrap text-[10px] font-semibold uppercase tracking-wider sm:text-xs`}
+                      className={`${cinzel.className} flex flex-shrink-0 items-center gap-1 whitespace-nowrap ${sectionType.label} font-semibold uppercase tracking-wider`}
                       style={{
                         color: copiedHashtagIndex === index ? palette.accent : palette.label,
                       }}
@@ -476,7 +477,7 @@ export function SnapShare() {
                 Share on Social Media
               </h5>
               <p
-                className={`font-goudy-italic ${ct.body} text-center leading-relaxed`}
+                className={`font-goudy-italic ${ct.body} text-center`}
                 style={{ color: palette.body }}
               >
                 Help spread the word about {coupleDisplayName}&apos;s wedding across your favorite
@@ -518,7 +519,7 @@ export function SnapShare() {
                   Upload Your Photos &amp; Videos
                 </p>
                 <p
-                  className={`font-goudy-italic ${ct.body} break-words text-center leading-relaxed`}
+                  className={`font-goudy-italic ${ct.body} break-words text-center`}
                   style={{ color: palette.body }}
                 >
                   {siteConfig.snapShare.instructions}
@@ -589,7 +590,7 @@ export function SnapShare() {
 
         <div className="mt-6 space-y-2 text-center sm:mt-8 md:mt-10">
           <p
-            className={`font-goudy-italic ${ct.bodyLg} leading-relaxed`}
+            className={`font-goudy-italic ${ct.bodyLg}`}
             style={{ color: OUTSIDE_TEXT_MUTED, textShadow: READABLE_SHADOW }}
           >
             Thank you for helping make {coupleDisplayName}&apos;s wedding celebration memorable.

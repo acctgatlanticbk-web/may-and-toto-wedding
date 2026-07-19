@@ -6,6 +6,7 @@ import { ChevronDown } from "lucide-react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -40,10 +41,10 @@ const dividerLineStyle = {
 } as const
 
 const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  question: "text-xs sm:text-sm md:text-base",
+  label: sectionType.label,
+  body: sectionType.textRelaxed,
+  bodyLg: sectionType.textRelaxed,
+  question: sectionType.text,
 } as const
 
 const linkClass =
@@ -82,17 +83,17 @@ function OrnamentalDivider() {
 function FaqTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: "var(--color-welcome-navy)",
@@ -231,7 +232,7 @@ function FaqAnswer({ answer }: { answer: string | ReactNode }) {
   if (typeof answer !== "string") {
     return (
       <div
-        className={`font-goudy-italic ${ct.body} leading-relaxed whitespace-pre-line`}
+        className={`font-goudy-italic ${ct.body} whitespace-pre-line`}
         style={{ color: palette.body }}
       >
         {answer}
@@ -241,7 +242,7 @@ function FaqAnswer({ answer }: { answer: string | ReactNode }) {
 
   return (
     <p
-      className={`font-goudy-italic ${ct.body} leading-relaxed whitespace-pre-line`}
+      className={`font-goudy-italic ${ct.body} whitespace-pre-line`}
       style={{ color: palette.body }}
     >
       {answer}
@@ -299,7 +300,7 @@ export function FAQ() {
       </div>
 
       {/* Header */}
-      <div className="relative z-20 px-6 text-center sm:px-10 md:px-12">
+      <div className="relative z-20 mx-auto max-w-5xl px-6 text-center @container/faq sm:px-10 md:px-12">
         <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
           <OrnamentalDivider />
         </div>
@@ -307,7 +308,7 @@ export function FAQ() {
           <FaqTitle />
         </div>
         <p
-          className={`font-goudy-italic ${ct.bodyLg} mx-auto mt-4 max-w-2xl leading-relaxed px-2 sm:mt-5 md:mt-6`}
+          className={`font-goudy-italic mx-auto mt-4 max-w-2xl px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
           style={{ color: palette.body }}
         >
           Helpful notes so you can simply arrive, celebrate, and enjoy this new chapter with us.

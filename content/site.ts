@@ -27,7 +27,7 @@ export const siteConfig = {
   wedding: {
     date: "August 31,2026",
     time: "4:00 PM",
-    venue: "Don Jose Heights Atrium Hall",
+    venue: "Don Jose Heights Atrium and Clubhouse",
     tagline: "are getting married!!!!!",
     theme: "Our wedding palette is inspired by timeless elegance and warmth.Motif Colors: Champagne Gold, Soft Beige, Warm Soft Brown",
     motif: "#BBCED5, #B9C3A8, #F3D8C5, #D1C4D4, #ECD8BA, #F4E8D8, #E1DCCF",
@@ -65,7 +65,7 @@ export const siteConfig = {
     // }
   },
   ceremony: {
-    location: "Don Jose Heights Atrium Hall",
+    location: "Don Jose Heights Atrium and Clubhouse",
     venue: "Doña Carmen Ave. Don Jose Heights Subd. Brgy. Commonwealth, Quezon City, Philippines",
     map: "https://maps.app.goo.gl/6Uo3aPZHLPf4DmNAA",
     date: "August 31, 2026",

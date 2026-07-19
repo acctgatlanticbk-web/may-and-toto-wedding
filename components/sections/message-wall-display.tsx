@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useState, useEffect } from "react"
 import { Cinzel } from "next/font/google"
+import { sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -18,15 +19,6 @@ const palette = {
   heading: "var(--color-welcome-navy)",
   label: "var(--color-welcome-heading)",
   accent: "var(--color-welcome-green)",
-} as const
-
-const ct = {
-  name: "text-xs sm:text-sm md:text-base",
-  date: "text-[10px] sm:text-[11px] md:text-xs",
-  message: "text-xs sm:text-sm md:text-base lg:text-lg",
-  emptyTitle: "text-base sm:text-lg md:text-xl lg:text-2xl",
-  emptyBody: "text-xs sm:text-sm md:text-base",
-  badge: "text-[10px] sm:text-xs md:text-sm",
 } as const
 
 const messageCardStyle = {
@@ -94,20 +86,20 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
     return (
       <div className="px-4 py-8 text-center sm:py-12 md:py-16">
         <h3
-          className={`${cinzel.className} ${ct.emptyTitle} mb-2 font-semibold sm:mb-3`}
+          className={`${cinzel.className} mb-2 font-semibold sm:mb-3 ${sectionType.subheader}`}
           style={{ color: OUTSIDE_TEXT }}
         >
           No messages yet
         </h3>
         <p
-          className={`font-goudy-italic ${ct.emptyBody} mx-auto mb-5 max-w-md leading-relaxed sm:mb-6`}
+          className={`font-goudy-italic mx-auto mb-5 max-w-md sm:mb-6 ${sectionType.textRelaxed}`}
           style={{ color: OUTSIDE_TEXT_MUTED }}
         >
           Be the first to leave a note for the happy couple.
         </p>
         <div className="flex justify-center">
           <span
-            className={`font-goudy-italic ${ct.badge} rounded-sm border px-4 py-2`}
+            className={`font-goudy-italic ${sectionType.label} rounded-sm border px-4 py-2`}
             style={{
               color: palette.heading,
               backgroundColor: "var(--color-welcome-bg-soft)",
@@ -158,7 +150,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-md ring-2 ring-white transition-transform duration-300 group-hover:scale-110 sm:h-9 sm:w-9 md:h-10 md:w-10"
                   style={{ backgroundColor: palette.accent }}
                 >
-                  <span className={`${cinzel.className} text-[10px] font-semibold text-white sm:text-xs`}>
+                  <span className={`${cinzel.className} ${sectionType.label} font-semibold text-white`}>
                     {msg.name
                       .split(" ")
                       .map((n) => n[0])
@@ -169,12 +161,12 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                 </div>
                 <div className="min-w-0 flex-1">
                   <h4
-                    className={`${cinzel.className} ${ct.name} truncate font-semibold`}
+                    className={`${cinzel.className} ${sectionType.text} truncate font-semibold`}
                     style={{ color: palette.heading }}
                   >
                     {msg.name}
                   </h4>
-                  <span className={ct.date} style={{ color: palette.label }}>
+                  <span className={sectionType.label} style={{ color: palette.label }}>
                     {new Date(msg.timestamp).toLocaleDateString("en-US", {
                       year: "numeric",
                       month: "short",
@@ -195,7 +187,7 @@ export default function MessageWallDisplay({ messages, loading }: MessageWallDis
                 &ldquo;
               </span>
               <p
-                className={`font-goudy-italic ${ct.message} relative z-10 leading-relaxed italic`}
+                className={`font-goudy-italic relative z-10 italic ${sectionType.textRelaxed}`}
                 style={{ color: palette.body }}
               >
                 {msg.message}

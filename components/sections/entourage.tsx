@@ -5,6 +5,7 @@ import { useState, useEffect, useMemo, useRef } from "react"
 import localFont from "next/font/local"
 import { entourage as staticEntourage, principalSponsors as staticSponsors } from "@/content/site"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import { Cinzel } from "next/font/google"
 
 const cinzel = Cinzel({
@@ -54,7 +55,7 @@ const palette = {
 } as const
 
 const nameStyle: React.CSSProperties = {
-  fontSize: "clamp(0.6875rem, 2.55vw, 1.0625rem)",
+  fontSize: "clamp(0.75rem, min(2.55vw, 9cqi), 1.125rem)",
   lineHeight: 1.3,
 }
 
@@ -68,7 +69,7 @@ function EntourageCoupleLabel({ groom, bride }: { groom: string; bride: string }
     <div className="flex items-center justify-center gap-2.5 sm:gap-3.5">
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
-        className={`${cinzel.className} shrink-0 py-0.5 text-[0.525rem] font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:text-[0.55rem] min-[400px]:tracking-[0.38em] sm:text-[0.575rem] sm:tracking-[0.44em]`}
+        className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
         style={{ color: "var(--color-welcome-navy)" }}
       >
         With {groom}
@@ -100,17 +101,17 @@ function EntourageCoupleLabel({ groom, bride }: { groom: string; bride: string }
 function EntourageTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(1.55rem, 4.1vw + 0.65rem, 4.5rem)",
-          "--script-size": "clamp(1rem, 4vw, 2rem)",
-          "--script-overlap": "clamp(-0.6rem, -2.5vw, -1.35rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: "var(--color-welcome-navy)",
@@ -168,11 +169,11 @@ function principalSponsorFromApi(row: Record<string, unknown>): PrincipalSponsor
 }
 
 const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  sectionTitle: "text-[10px] sm:text-xs md:text-sm lg:text-base",
-  role: "text-[9px] sm:text-[10px] md:text-xs",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
+  label: sectionType.label,
+  sectionTitle: `${sectionType.label} lg:text-base`,
+  role: "text-[11px] sm:text-xs md:text-sm",
+  body: sectionType.text,
+  bodyLg: sectionType.subheader,
 } as const
 
 function mapStaticEntourage(): EntourageMember[] {
@@ -526,7 +527,7 @@ export function Entourage() {
         </div>
 
       {/* Section Header */}
-      <div className={`relative z-20 mb-6 px-6 text-center sm:mb-8 sm:px-10 md:mb-10 md:px-12 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
+      <div className={`relative z-20 mx-auto mb-6 max-w-5xl px-6 text-center @container/entourage sm:mb-8 sm:px-10 md:mb-10 md:px-12 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-10"}`}>
         <EntourageCoupleLabel
           groom={siteConfig.couple.groomNickname || siteConfig.couple.groom}
           bride={siteConfig.couple.brideNickname || siteConfig.couple.bride}
@@ -537,7 +538,7 @@ export function Entourage() {
         </div>
 
         <p
-          className="font-goudy-italic mx-auto max-w-xl px-2 text-[0.75rem] leading-[1.62] sm:text-[0.8125rem] sm:leading-[1.65] md:text-[0.84375rem]"
+          className={`font-goudy-italic mx-auto max-w-xl px-2 ${sectionType.textRelaxed}`}
           style={{ color: "var(--color-welcome-text)" }}
         >
           Honoring those who stand with us on our special day
@@ -553,7 +554,7 @@ export function Entourage() {
 
       {/* Central Card Container */}
       <div
-        className={`relative z-20 max-w-5xl mx-auto px-4 sm:px-6 md:px-8 pb-2 sm:pb-3 transition-all duration-1000 delay-300 ${
+        className={`relative z-20 max-w-5xl mx-auto px-4 sm:px-6 md:px-8 pb-2 sm:pb-3 @container/entourage-card transition-all duration-1000 delay-300 ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
         }`}
       >

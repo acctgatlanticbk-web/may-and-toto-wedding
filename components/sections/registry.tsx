@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import Image from "next/image"
 
 const cinzel = Cinzel({
@@ -35,9 +36,9 @@ const outsideDividerLineStyle = {
 } as const
 
 const ct = {
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  label: "text-[11px] sm:text-xs md:text-sm",
+  body: sectionType.text,
+  bodyLg: sectionType.textRelaxed,
+  label: sectionType.label,
 } as const
 
 function OutsideDivider() {
@@ -59,17 +60,17 @@ function OutsideDivider() {
 function RegistryTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: OUTSIDE_TEXT,
@@ -107,7 +108,7 @@ export function Registry() {
       id="registry"
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 bg-transparent pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
     >
-      <div className="relative z-20 mx-auto max-w-3xl px-4 sm:px-6 md:px-8">
+      <div className="relative z-20 mx-auto max-w-3xl px-4 @container/registry sm:px-6 md:px-8">
         <div className="relative z-20 px-6 text-center sm:px-10 md:px-12">
           <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
             <OutsideDivider />
@@ -116,7 +117,7 @@ export function Registry() {
             <RegistryTitle />
           </div>
           <p
-            className={`font-goudy-italic ${ct.bodyLg} mx-auto mt-4 max-w-2xl whitespace-pre-line leading-relaxed px-2 sm:mt-5 md:mt-6`}
+            className={`font-goudy-italic mx-auto mt-4 max-w-2xl whitespace-pre-line px-2 sm:mt-5 md:mt-6 ${ct.bodyLg}`}
             style={{ color: OUTSIDE_TEXT_MUTED, textShadow: READABLE_SHADOW }}
           >
             {`As love is what this day is all about,\nyour presence is already the greatest gift we could ever ask for.\nHowever, if you'd like to give, a monetary gift toward our future would be most appreciated.`}
@@ -137,7 +138,7 @@ export function Registry() {
                       key={item.id}
                       type="button"
                       onClick={() => setActiveQr(item.id)}
-                      className={`${cinzel.className} rounded-sm border px-4 py-2 text-[0.625rem] font-semibold uppercase tracking-[0.16em] transition-all duration-300 sm:px-5 sm:py-2.5 sm:text-[0.6875rem] sm:tracking-[0.2em]`}
+                      className={`${cinzel.className} rounded-sm border px-4 py-2 ${sectionType.label} font-semibold uppercase tracking-[0.16em] transition-all duration-300 sm:px-5 sm:py-2.5 sm:tracking-[0.2em]`}
                       style={
                         isActive
                           ? {
@@ -188,7 +189,7 @@ export function Registry() {
                   Account Details
                 </p>
                 <p
-                  className={`font-goudy-italic ${ct.body} leading-relaxed`}
+                  className={`font-goudy-italic ${ct.bodyLg}`}
                   style={{ color: OUTSIDE_TEXT_MUTED, textShadow: READABLE_SHADOW }}
                 >
                   {activeItem.accountNumber}

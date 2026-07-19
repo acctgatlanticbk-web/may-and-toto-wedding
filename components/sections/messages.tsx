@@ -10,6 +10,7 @@ import MessageWallDisplay from "./message-wall-display"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -43,13 +44,6 @@ const palette = {
 const outsideDividerLineStyle = {
   background:
     "linear-gradient(to right, transparent, rgba(255, 255, 255, 0.55), transparent)",
-} as const
-
-const ct = {
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  formTitle: "text-sm sm:text-base md:text-lg",
-  btn: "text-[0.625rem] sm:text-[0.6875rem] md:text-xs",
 } as const
 
 const cardStyle = {
@@ -91,17 +85,17 @@ function OutsideDivider() {
 function MessagesTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: OUTSIDE_TEXT,
@@ -193,7 +187,7 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
       : "color-mix(in srgb, var(--color-motif-deep) 22%, transparent)"
 
   const inputClass = (field: string) =>
-    `message-form-input w-full rounded-xl border-2 px-3 py-2 ${ct.body} shadow-sm transition-all duration-300 placeholder:italic hover:shadow-md focus:shadow-lg sm:px-4 sm:py-2.5 md:py-3 ${
+    `message-form-input w-full rounded-xl border-2 px-3 py-2 ${sectionType.text} shadow-sm transition-all duration-300 placeholder:italic hover:shadow-md focus:shadow-lg sm:px-4 sm:py-2.5 md:py-3 ${
       focusedField === field ? "shadow-lg" : ""
     }`
 
@@ -224,7 +218,7 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
             style={{ backgroundColor: "var(--color-welcome-bg-soft)" }}
           >
             <p
-              className={`${cinzel.className} font-semibold ${ct.formTitle}`}
+              className={`${cinzel.className} font-semibold ${sectionType.subheader}`}
               style={{ color: palette.heading }}
             >
               Sent!
@@ -235,12 +229,12 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
         <CardContent className="relative p-4 sm:p-5 md:p-6 lg:p-8">
           <div className="mb-4 text-center sm:mb-5 md:mb-6">
             <h3
-              className={`${cinzel.className} ${ct.formTitle} mb-1.5 font-semibold`}
+              className={`${cinzel.className} ${sectionType.subheader} mb-1.5 font-semibold`}
               style={{ color: palette.heading }}
             >
               Share Your Love
             </h3>
-            <p className={`font-goudy-italic ${ct.body}`} style={{ color: palette.body }}>
+            <p className={`font-goudy-italic ${sectionType.text}`} style={{ color: palette.body }}>
               Leave a note for {coupleDisplayName} to read and keep.
             </p>
           </div>
@@ -254,7 +248,7 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
           >
             <div className="space-y-1.5 sm:space-y-2">
               <label
-                className={`${cinzel.className} ${ct.body} font-medium`}
+                className={`${cinzel.className} ${sectionType.text} font-medium`}
                 style={{ color: palette.label }}
               >
                 Your Name
@@ -279,14 +273,14 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
             <div className="space-y-1.5 sm:space-y-2">
               <div className="flex items-center justify-between gap-2">
                 <label
-                  className={`${cinzel.className} ${ct.body} font-medium`}
+                  className={`${cinzel.className} ${sectionType.text} font-medium`}
                   style={{ color: palette.label }}
                 >
                   Your Message
                 </label>
                 {messageValue && (
                   <span
-                    className={`text-[10px] sm:text-[11px] md:text-xs ${messageValue.length > 500 ? "text-red-500" : ""}`}
+                    className={`${sectionType.label} ${messageValue.length > 500 ? "text-red-500" : ""}`}
                     style={messageValue.length <= 500 ? { color: palette.accent } : undefined}
                   >
                     {messageValue.length}/500
@@ -317,7 +311,7 @@ function MessageForm({ onSuccess, onMessageSent }: MessageFormProps) {
             <Button
               type="submit"
               disabled={isSubmitting || !nameValue.trim() || !messageValue.trim()}
-              className={`${cinzel.className} group relative w-full rounded-sm border px-5 py-2.5 font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 disabled:transform-none sm:py-3 sm:tracking-[0.24em] md:tracking-[0.28em] ${ct.btn}`}
+              className={`${cinzel.className} group relative w-full rounded-sm border px-5 py-2.5 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70 disabled:transform-none sm:py-3 sm:tracking-[0.24em] md:tracking-[0.28em]`}
               style={{
                 backgroundColor: "var(--color-welcome-green)",
                 borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -394,7 +388,7 @@ export function Messages() {
       id="messages"
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 bg-transparent pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
     >
-      <div className="relative z-10 mx-auto max-w-6xl px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-3 @container/messages sm:px-4 md:px-6 lg:px-8">
         {/* Header — outside container */}
         <div className="mb-6 text-center sm:mb-8 md:mb-10">
           <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
@@ -404,7 +398,7 @@ export function Messages() {
             <MessagesTitle />
           </div>
           <p
-            className={`font-goudy-italic ${ct.bodyLg} mx-auto mt-4 max-w-2xl leading-relaxed px-2 sm:mt-5 md:mt-6`}
+            className={`font-goudy-italic mx-auto mt-4 max-w-2xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
             style={{ color: OUTSIDE_TEXT_MUTED }}
           >
             Share a short note, wish, or prayer for {coupleDisplayName}. Every message becomes part
@@ -426,12 +420,12 @@ export function Messages() {
         <div className="relative mx-auto max-w-4xl pb-2 sm:pb-3">
           <div className="mb-4 text-center sm:mb-6 md:mb-8">
             <h3
-              className={`${cinzel.className} mb-1.5 text-sm font-semibold sm:mb-2 sm:text-base md:text-lg lg:text-xl`}
+              className={`${cinzel.className} mb-1.5 font-semibold sm:mb-2 ${sectionType.subheader}`}
               style={{ color: OUTSIDE_TEXT }}
             >
               Messages from Loved Ones
             </h3>
-            <p className={`font-goudy-italic ${ct.body}`} style={{ color: OUTSIDE_TEXT_MUTED }}>
+            <p className={`font-goudy-italic ${sectionType.text}`} style={{ color: OUTSIDE_TEXT_MUTED }}>
               Warm words from family and friends
             </p>
             <div className="flex items-center justify-center pt-3 sm:pt-4">

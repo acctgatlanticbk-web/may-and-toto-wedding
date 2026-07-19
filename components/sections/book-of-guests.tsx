@@ -5,6 +5,7 @@ import { RefreshCw } from "lucide-react"
 import localFont from "next/font/local"
 import { Cinzel } from "next/font/google"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -72,12 +73,12 @@ const chipSecondaryStyle = {
 } as const
 
 const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
+  label: sectionType.label,
+  body: sectionType.text,
+  bodyLg: sectionType.subheader,
   stat: "text-2xl sm:text-3xl md:text-4xl",
-  guestName: "text-sm sm:text-base md:text-lg",
-  meta: "text-[10px] sm:text-xs md:text-sm",
+  guestName: sectionType.subheader,
+  meta: sectionType.label,
 } as const
 
 function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
@@ -90,7 +91,7 @@ function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
     <div className="flex items-center justify-center gap-2.5 sm:gap-3.5">
       <span className="h-px w-5 sm:w-7 md:w-9" style={lineStyle} aria-hidden />
       <p
-        className={`${cinzel.className} shrink-0 py-0.5 text-[0.525rem] font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:text-[0.55rem] min-[400px]:tracking-[0.38em] sm:text-[0.575rem] sm:tracking-[0.44em]`}
+        className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
         style={{ color: "var(--color-welcome-navy)" }}
       >
         Celebrating With {groom}
@@ -122,17 +123,17 @@ function GuestsCoupleLabel({ groom, bride }: { groom: string; bride: string }) {
 function BookOfGuestsTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(1.55rem, 4.1vw + 0.65rem, 4.5rem)",
-          "--script-size": "clamp(1rem, 4vw, 2rem)",
-          "--script-overlap": "clamp(-0.6rem, -2.5vw, -1.35rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: "var(--color-welcome-navy)",
@@ -362,13 +363,13 @@ export function BookOfGuests() {
       </div>
 
       {/* Section Header */}
-      <div className="relative z-20 mb-6 px-6 text-center sm:mb-8 sm:px-10 md:mb-10 md:px-12">
+      <div className="relative z-20 mx-auto mb-6 max-w-5xl px-6 text-center @container/book-of-guests sm:mb-8 sm:px-10 md:mb-10 md:px-12">
         <GuestsCoupleLabel groom={groomName} bride={brideName} />
         <div className="my-4 sm:my-5 md:my-6">
           <BookOfGuestsTitle />
         </div>
         <p
-          className="font-goudy-italic mx-auto max-w-2xl px-2 text-[0.75rem] leading-[1.62] sm:text-[0.8125rem] sm:leading-[1.65] md:text-[0.84375rem]"
+          className={`font-goudy-italic mx-auto max-w-2xl px-2 ${sectionType.textRelaxed}`}
           style={{ color: "var(--color-welcome-text)" }}
         >
           Meet the cherished souls joining us in celebration — your presence makes our day truly
@@ -523,7 +524,7 @@ export function BookOfGuests() {
                             "linear-gradient(145deg, var(--color-welcome-green) 0%, var(--color-welcome-navy) 100%)",
                         }}
                       >
-                        <span className={`${cinzel.className} text-white font-semibold text-xs sm:text-sm md:text-base`}>
+                        <span className={`${cinzel.className} text-white font-semibold ${sectionType.text}`}>
                           {getInitials(guest.name)}
                         </span>
                       </div>
@@ -605,7 +606,7 @@ export function BookOfGuests() {
                                 </span>
                                 {companion.relationship && companion.relationship.trim() !== "" && (
                                   <span
-                                    className={`${cinzel.className} rounded-full border px-1.5 py-0.5 text-[9px] font-medium whitespace-nowrap sm:px-2 sm:text-[10px]`}
+                                    className={`${cinzel.className} rounded-full border px-1.5 py-0.5 ${sectionType.label} font-medium whitespace-nowrap sm:px-2`}
                                     style={chipSecondaryStyle}
                                   >
                                     {companion.relationship}

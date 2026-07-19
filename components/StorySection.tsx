@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import localFont from "next/font/local"
+import { sectionType, storyChapterTitleSize } from "@/lib/section-typography"
 import Image from "next/image"
 import { TornPaperEdge } from "./TornPaperEdge"
 
@@ -113,20 +114,23 @@ export const StorySection: React.FC<StorySectionProps> = ({
           </div>
 
           <div
-            className="w-[55%] md:w-5/12"
+            className="w-[55%] @container/story md:w-5/12"
             style={{ color: isDark ? lightBg : "var(--color-welcome-text)" }}
           >
             {title && (
               <h2
-                className={`${theSeasons.className} mb-3 text-xl uppercase leading-tight tracking-[0.08em] transition-all delay-500 duration-1000 sm:mb-4 sm:text-2xl sm:tracking-[0.1em] md:mb-6 md:text-3xl md:tracking-[0.12em] lg:text-4xl ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
-                style={{ color: isDark ? lightBg : "var(--color-welcome-navy)" }}
+                className={`${theSeasons.className} mb-3 uppercase leading-tight tracking-[0.08em] transition-all delay-500 duration-1000 sm:mb-4 sm:tracking-[0.1em] md:mb-6 md:tracking-[0.12em] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+                style={{
+                  fontSize: storyChapterTitleSize,
+                  color: isDark ? lightBg : "var(--color-welcome-navy)",
+                }}
               >
                 {title}
               </h2>
             )}
 
             <div
-              className={`font-goudy-italic space-y-3 text-[0.8125rem] leading-[1.62] transition-all delay-700 duration-1000 sm:space-y-4 sm:text-[0.875rem] sm:leading-[1.65] md:space-y-6 md:text-[0.9375rem] lg:text-base lg:leading-[1.7] ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
+              className={`font-goudy-italic space-y-3 transition-all delay-700 duration-1000 sm:space-y-4 md:space-y-6 lg:leading-[1.7] ${sectionType.textRelaxed} ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"} `}
             >
               {text}
             </div>

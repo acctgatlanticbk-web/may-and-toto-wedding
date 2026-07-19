@@ -3,6 +3,7 @@
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 
 const cinzel = Cinzel({
   subsets: ["latin"],
@@ -40,12 +41,6 @@ const outsideDividerLineStyle = {
 const insideDividerLineStyle = {
   background:
     "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
-} as const
-
-const ct = {
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  btn: "text-[0.625rem] sm:text-[0.6875rem] md:text-xs",
 } as const
 
 const cardStyle = {
@@ -92,17 +87,17 @@ function InsideDivider() {
 function VideoMessageTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: OUTSIDE_TEXT,
@@ -137,7 +132,7 @@ export function VideoMessage() {
       id="video-message"
       className={`${theSeasons.variable} ${aboveTheBeyond.variable} relative z-10 bg-transparent pt-8 pb-8 sm:pt-10 sm:pb-10 md:pt-12 md:pb-12 lg:pt-14 lg:pb-14`}
     >
-      <div className="relative z-20 mx-auto max-w-4xl px-4 sm:px-6 md:px-8">
+      <div className="relative z-20 mx-auto max-w-4xl px-4 @container/video-message sm:px-6 md:px-8">
         <div className="relative z-20 px-6 text-center sm:px-10 md:px-12">
           <div className="mx-auto mb-5 sm:mb-6 md:mb-7">
             <OutsideDivider />
@@ -161,7 +156,7 @@ export function VideoMessage() {
 
           <div className="relative z-20 space-y-4 px-4 py-6 text-center sm:space-y-5 sm:px-6 sm:py-8 md:space-y-6 md:px-8 md:py-10">
             <div
-              className={`font-goudy-italic ${ct.bodyLg} space-y-2.5 leading-relaxed sm:space-y-3`}
+              className={`font-goudy-italic space-y-2.5 sm:space-y-3 ${sectionType.textRelaxed}`}
               style={{ color: palette.body }}
             >
               <p>
@@ -187,7 +182,7 @@ export function VideoMessage() {
 
             <div className="space-y-3 pt-2 sm:space-y-4 sm:pt-3">
               <p
-                className={`font-goudy-italic ${ct.body}`}
+                className={`font-goudy-italic ${sectionType.text}`}
                 style={{ color: palette.heading }}
               >
                 Upload your video message here:
@@ -198,7 +193,7 @@ export function VideoMessage() {
                   href={uploadUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${cinzel.className} group relative inline-flex items-center justify-center rounded-sm border px-6 py-2.5 font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:px-8 sm:py-3 sm:tracking-[0.24em] md:px-10 md:py-3.5 md:tracking-[0.28em] ${ct.btn}`}
+                  className={`${cinzel.className} group relative inline-flex items-center justify-center rounded-sm border px-6 py-2.5 ${sectionType.label} font-semibold uppercase tracking-[0.2em] shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:px-8 sm:py-3 sm:tracking-[0.24em] md:px-10 md:py-3.5 md:tracking-[0.28em]`}
                   style={{
                     backgroundColor: "var(--color-welcome-green)",
                     borderColor: "color-mix(in srgb, var(--color-welcome-navy) 35%, transparent)",
@@ -221,7 +216,7 @@ export function VideoMessage() {
                   />
                 </a>
               ) : (
-                <p className={`font-goudy-italic ${ct.body}`} style={{ color: palette.body }}>
+                <p className={`font-goudy-italic ${sectionType.text}`} style={{ color: palette.body }}>
                   Upload link coming soon.
                 </p>
               )}

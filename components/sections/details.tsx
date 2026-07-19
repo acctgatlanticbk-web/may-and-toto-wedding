@@ -4,6 +4,7 @@ import { Section } from "@/components/section"
 import { useState, useEffect, type ReactNode } from "react"
 import { QRCodeSVG } from "qrcode.react"
 import { useSiteConfig } from "@/hooks/use-site-config"
+import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
 import Image from "next/image"
 import localFont from "next/font/local"
 import { Cinzel } from "next/font/google"
@@ -89,17 +90,17 @@ function SectionIconDivider({ icon }: { icon: React.ReactNode }) {
 function DetailsTitle() {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": "clamp(2.15rem, 11vw, 4.5rem)",
-          "--script-size": "clamp(1.1rem, 4.5vw, 2.25rem)",
-          "--script-overlap": "clamp(-0.65rem, -2.8vw, -1.5rem)",
+          "--title-size": layeredSectionTitleSize.main,
+          "--script-size": layeredSectionTitleSize.script,
+          "--script-overlap": layeredSectionTitleSize.overlap,
         } as React.CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
           fontSize: "var(--title-size)",
           color: "var(--color-welcome-navy)",
@@ -125,27 +126,27 @@ function DetailsTitle() {
   )
 }
 
-// Slightly compact type inside card containers (not the page header)
+// Card and section type — aligned with shared sectionType scale
 const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  labelSm: "text-[10px] sm:text-[11px] md:text-xs",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyMd: "text-xs sm:text-sm md:text-base lg:text-lg",
-  bodyLg: "text-sm sm:text-base md:text-lg",
-  subhead: "text-xs sm:text-sm md:text-base lg:text-lg",
-  time: "text-xs sm:text-sm md:text-base lg:text-xl",
-  cardTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
-  overlayTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
-  overlaySub: "text-xs sm:text-sm md:text-base",
-  month: "text-base sm:text-xl md:text-2xl lg:text-3xl",
-  dayNum: "text-2xl sm:text-4xl md:text-5xl lg:text-6xl",
-  year: "text-base sm:text-xl md:text-2xl lg:text-3xl",
-  sectionTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
-  attireCardTitle: "text-sm sm:text-lg md:text-xl lg:text-2xl",
-  btn: "text-xs sm:text-sm md:text-base",
-  noteTitle: "text-xl sm:text-2xl md:text-3xl",
-  reminderHead: "text-base sm:text-lg md:text-xl",
-  reminderBody: "text-xs sm:text-sm md:text-base lg:text-lg",
+  label: sectionType.label,
+  labelSm: "text-[11px] sm:text-xs md:text-sm",
+  body: sectionType.text,
+  bodyMd: "text-[0.875rem] sm:text-[0.9375rem] md:text-base lg:text-lg",
+  bodyLg: sectionType.subheader,
+  subhead: "text-[0.875rem] sm:text-[0.9375rem] md:text-base lg:text-lg",
+  time: "text-sm sm:text-base md:text-lg lg:text-2xl",
+  cardTitle: "text-base sm:text-xl md:text-2xl lg:text-3xl",
+  overlayTitle: "text-base sm:text-xl md:text-2xl lg:text-3xl",
+  overlaySub: sectionType.text,
+  month: "text-lg sm:text-2xl md:text-3xl lg:text-4xl",
+  dayNum: "text-3xl sm:text-5xl md:text-6xl lg:text-7xl",
+  year: "text-lg sm:text-2xl md:text-3xl lg:text-4xl",
+  sectionTitle: "text-base sm:text-xl md:text-2xl lg:text-3xl",
+  attireCardTitle: "text-base sm:text-xl md:text-2xl lg:text-3xl",
+  btn: sectionType.text,
+  noteTitle: "text-2xl sm:text-3xl md:text-4xl",
+  reminderHead: "text-lg sm:text-xl md:text-2xl",
+  reminderBody: "text-[0.875rem] sm:text-[0.9375rem] md:text-base lg:text-lg",
 } as const
 
 const attireGuide = {
@@ -490,13 +491,13 @@ function EventVenueCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent z-20 pointer-events-none" />
 
           <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 md:bottom-6 md:left-6 right-3 sm:right-4 md:right-6 z-30">
-            <span className={`${cinzel.className} inline-block mb-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-[10px] sm:text-xs uppercase tracking-[0.2em] text-white border border-white/30`}>
+            <span className={`${cinzel.className} mb-2 inline-block rounded-full border border-white/30 bg-white/20 px-3 py-1 ${sectionType.label} uppercase tracking-[0.2em] text-white backdrop-blur-sm`}>
               {badge}
             </span>
             <h3 className={`${theSeasons.className} text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-white mb-1 sm:mb-1.5 drop-shadow-lg uppercase tracking-[0.12em] leading-tight`}>
               {locationName}
             </h3>
-            <p className={`${theSeasons.className} text-[10px] sm:text-xs md:text-sm lg:text-base text-white/95 drop-shadow-md tracking-[0.06em] leading-snug`}>
+            <p className={`${theSeasons.className} ${sectionType.textSnug} text-white/95 drop-shadow-md tracking-[0.06em] lg:text-lg`}>
               {venueAddress}
             </p>
           </div>
@@ -649,7 +650,7 @@ const COUPLE_IMAGES = [
   "/gallery-design/box (1).jpg",
   "/gallery-design/box (2).jpg",
   "/gallery-design/box (3).jpg",
-  "/mobile-background/couples-new (5).webp",
+  "/gallery-design/box (4).jpg",
 ]
 
 export function Details() {
@@ -779,9 +780,9 @@ export function Details() {
         </div>
 
         {/* Header */}
-        <div className="relative z-20 mb-6 px-6 text-center sm:mb-8 sm:px-10 md:mb-10 md:px-12">
+        <div className="relative z-20 mx-auto mb-6 max-w-5xl px-6 text-center @container/details sm:mb-8 sm:px-10 md:mb-10 md:px-12">
           <p
-            className={`${cinzel.className} mb-2 text-[0.525rem] font-semibold uppercase tracking-[0.34em] min-[400px]:text-[0.55rem] min-[400px]:tracking-[0.38em] sm:text-[0.575rem] sm:tracking-[0.44em]`}
+            className={`${cinzel.className} ${sectionType.label} mb-2 font-semibold uppercase tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
             style={{ color: "var(--color-welcome-heading)" }}
           >
             Our Celebration
@@ -790,7 +791,7 @@ export function Details() {
             <DetailsTitle />
           </div>
           <p
-            className="font-goudy-italic mx-auto max-w-2xl px-2 text-[0.75rem] leading-[1.62] sm:text-[0.8125rem] sm:leading-[1.65] md:text-[0.84375rem]"
+            className={`font-goudy-italic mx-auto max-w-2xl px-2 ${sectionType.textRelaxed}`}
             style={{ color: "var(--color-welcome-text)" }}
           >
             Everything you need to know about our special day.
