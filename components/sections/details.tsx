@@ -177,15 +177,15 @@ const attireGuide = {
   },
   
   guests: {
-    image: "/Details/guest-new.png",
+    image: "/Details/guestnew.png",
     imageAspect: "677/369",
     ladies: {
       colors: ["#BB9F89", "#CFAEA7", "#E9CFC2", "#E5D7CE"] as const,
       description: "Semi-formal dresses",
     },
     gentlemen: {
-      colors: ["#FFFFFF", "#000000"] as const,
-      description: "Semi-formal attire coat or long sleeves black pants",
+      colors: ["#BB9F89", "#CFAEA7", "#E9CFC2", "#E5D7CE"] as const,
+      description: "Semi-formal attire for gentlemen",
     },
   },
   guests2: {
@@ -664,7 +664,7 @@ export function Details() {
 
   const ceremonyImages = siteConfig.ceremony.image
   const receptionImages = siteConfig.reception.image
-  const dressCodeColors = ["#FA9A84","#FF7782", "#EFCFBA", "#DCBD9E"]
+  const dressCodeColors = ["#FFB4A7", "#DE8189", "#F2CFBB", "#DDBC9D"]
 
   useEffect(() => {
     if (ceremonyImages.length <= 1) return
