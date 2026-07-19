@@ -168,11 +168,11 @@ const attireGuide = {
     imageAspect: "669/373",
     ladies: {
       colors: ["#F0B39D", "#E7A8B2", "#D89AA7", "#F3C9B4"] as const,
-      description: "Floor-length gowns in Peach, Blush Pink, Dusty Rose, or Soft Coral",
+      description: "Floor-length gowns in Peach and  Blush Pink",
     },
     gentlemen: {
       colors: ["#B8B8B8", "#FFFFFF", "#D88C97"] as const,
-      description: "Light gray suits with white inner shirts and blush pink neckties",
+      description: "Light gray suits with white inner shirts and Peach neckties",
     },
   },
   
@@ -181,11 +181,11 @@ const attireGuide = {
     imageAspect: "677/369",
     ladies: {
       colors: ["#FFB4A7", "#DE8189", "#F2CFBB", "#DDBC9D"] as const,
-      description: "Formal Dresses",
+      description: "Formal Dress",
     },
     gentlemen: {
       colors: ["#FFB4A7", "#DE8189", "#F2CFBB", "#DDBC9D"] as const,
-      description: "Formal Attire for Gentlemen",
+      description: "Formal Attire",
     },
   },
   guests2: {
@@ -709,7 +709,7 @@ export function Details() {
   }
 
   // Venue information from site config
-  const ceremonyVenueName = siteConfig.ceremony.location
+  const ceremonyVenueName = siteConfig.wedding.venue
   const ceremonyVenueDetail = ""
   const ceremonyAddress = siteConfig.ceremony.venue
   const ceremonyVenue = `${ceremonyVenueName}, ${ceremonyAddress}`

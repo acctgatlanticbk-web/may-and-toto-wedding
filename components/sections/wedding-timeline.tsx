@@ -125,7 +125,7 @@ function buildTimelineEvents(siteConfig: SiteConfig): TimelineEvent[] {
     {
       time: "3:30 PM",
       title: "Arrival",
-      location: siteConfig.ceremony.location,
+      location: siteConfig.reception.location,
       icon: GuestsIcon,
       imageSrc: "/weddingtimeline/arrivalimage.png",
     },
@@ -147,7 +147,7 @@ function buildTimelineEvents(siteConfig: SiteConfig): TimelineEvent[] {
     {
       time: "5:30 PM",
       title: "Cocktail Hour",
-      location: siteConfig.ceremony.location,
+      location: siteConfig.reception.location,
       icon: CocktailIcon,
       imageSrc: "/weddingtimeline/CockTailHour.png",
     },
@@ -155,21 +155,21 @@ function buildTimelineEvents(siteConfig: SiteConfig): TimelineEvent[] {
     {
       time: "6:30 PM",
       title: "Reception",
-      location: siteConfig.ceremony.location,
+      location: siteConfig.reception.location,
       icon: DinnerIcon,
       imageSrc: "/weddingtimeline/reception welcom.png",
     },
     {
       time: "7:00 PM",
       title: "Reception Program",
-      location: siteConfig.ceremony.location,
+      location: siteConfig.reception.location,
       icon: FireworksIcon,
       imageSrc: "/weddingtimeline/dance.png",
     },
     {
       time: "7:30 PM",
       title: "Dinner",
-      location: siteConfig.ceremony.location,
+      location: siteConfig.reception.location,
       icon: DinnerIcon,
       imageSrc: "/weddingtimeline/DinnerService.png",
     },

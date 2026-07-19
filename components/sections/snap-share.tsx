@@ -366,7 +366,7 @@ export function SnapShare() {
             </p>
           </ContentCard>
 
-          <div className="w-full min-w-0 space-y-5 sm:space-y-6 lg:order-2">
+          {/* <div className="w-full min-w-0 space-y-5 sm:space-y-6 lg:order-2">
             <ContentCard>
               <h4
                 className={`${cinzel.className} ${ct.cardTitle} text-center font-semibold uppercase tracking-[0.08em]`}
@@ -585,7 +585,7 @@ export function SnapShare() {
                 </div>
               </ContentCard>
             )}
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-6 space-y-2 text-center sm:mt-8 md:mt-10">

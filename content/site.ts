@@ -65,7 +65,7 @@ export const siteConfig = {
     // }
   },
   ceremony: {
-    location: "Don Jose Heights Atrium and Clubhouse",
+    location: "Don Jose Heights Atrium Hall",
     venue: "Doña Carmen Ave. Don Jose Heights Subd. Brgy. Commonwealth, Quezon City, Philippines",
     map: "https://maps.app.goo.gl/6Uo3aPZHLPf4DmNAA",
     date: "August 31, 2026",
@@ -76,8 +76,8 @@ export const siteConfig = {
     image: ["/Details/ceremony.webp", "/Details/ceremony2.webp", "/Details/ceremony3.webp"],
   },
   reception: {
-    location: "Primus Hotel and Resort - Peñafrancia Hall",
-    venue: "Caceres Heights Subdivision, KM 9, Pacol Road, Brgy. Pacol, Naga City, Camarines Sur",
+    location: "Don Jose Heights Atrium Clubhouse",
+    venue: "Doña Carmen Ave. Don Jose Heights Subd. Brgy. Commonwealth, Quezon City, Philippines",
     map: "https://maps.app.goo.gl/rmudeAwUsF5hmCq78",
     date: "December 12, 2026",
     day: "Saturday",
@@ -142,7 +142,7 @@ Now, as they prepare to say yes before God and the people they love most, Cather
   },
   snapShare: {
     googleDriveLink:
-      "https://drive.google.com/drive/folders/1aVvQuyGBtEX9rLoh7FxM2sJt9i8v-QCL?usp=sharing",
+      "https://drive.google.com/drive/folders/1oLDrdvd7nZtkk8Gz_xMgXC9KTplOV5Z-?usp=sharing",
     albumQR: "/QR/AlbumQR.png",
     hashtag: ["#TOTOallyMAYdForEachOther",],
     instructions: "Please scan this QR Code and upload the photos and videos you have taken during our wedding reception. We are delighted to see your snaps too!",

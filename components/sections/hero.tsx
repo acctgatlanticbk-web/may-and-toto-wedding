@@ -646,7 +646,7 @@ export function Hero() {
             className={`${cinzel.className} text-xs sm:text-sm md:text-base lg:text-lg uppercase tracking-[0.22em] sm:tracking-[0.26em] md:tracking-[0.3em] text-motif-cream font-medium text-center`}
             style={{ textShadow: "0 2px 18px rgba(0,0,0,0.9)" }}
           >
-            {siteConfig.ceremony.location}
+            {siteConfig.wedding.venue}
           </p>
 
           <div className="w-full pt-1 sm:pt-2">

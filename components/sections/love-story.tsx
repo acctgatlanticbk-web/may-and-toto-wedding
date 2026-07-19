@@ -158,7 +158,7 @@ export function LoveStory() {
   text={
     <>
       <p>
-      A man who was broken and in pain at that time unexpectedly cross paths with a woman who was contented and has entrusted her single life to God. A gap of 15 years in age, he is a widow and she is  young. Both did not expect what's coming but God has a beautiful plan for them.
+      A man who was broken and in pain at that time unexpectedly crossed paths with a woman who was contented and has entrusted her single life to God. A gap of 15 years in age, he is a widow and she is  young. Both did not expect what's coming but God has a beautiful plan for them.
       </p>
     </>
   }
@@ -172,7 +172,7 @@ export function LoveStory() {
   text={
     <>
       <p>
-      One short message and one warm reply is all that it takes. Small talks turned to hours of conversations, they got deeper and more personal as the days past and days turned into weeks and months without ceasing. He was healing and found a reason to be happy again while she has found peace and sincere connection with her newfound friend. 
+      One short message and one warm reply is all that it takes. Small talks turned to hours of conversations, they got deeper and more personal as the days passed and days turned into weeks and months without ceasing. He was healing and found a reason to be happy again while she has found peace and sincere connection with her newfound friend. 
       </p>
     </>
   }
