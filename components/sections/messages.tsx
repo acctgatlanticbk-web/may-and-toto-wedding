@@ -401,8 +401,7 @@ export function Messages() {
             className={`font-goudy-italic mx-auto mt-4 max-w-2xl px-2 sm:mt-5 md:mt-6 ${sectionType.textRelaxed}`}
             style={{ color: OUTSIDE_TEXT_MUTED }}
           >
-            Share a short note, wish, or prayer for {coupleDisplayName}. Every message becomes part
-            of their story.
+            Share a short note, wish, or prayer for {coupleDisplayName}. Every message becomes part of our story
           </p>
           <div className="flex items-center justify-center pt-3 sm:pt-4">
             <span className="h-px w-16 sm:w-24 md:w-32 bg-white/50" />

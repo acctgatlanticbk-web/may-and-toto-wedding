@@ -152,9 +152,9 @@ export function Footer() {
   const ceremonyDate = siteConfig.ceremony.date
   const ceremonyTime = siteConfig.ceremony.time
   const receptionTime = siteConfig.reception.time
-  const ceremonyVenue = siteConfig.ceremony.location
+  const ceremonyVenue = siteConfig.wedding.venue
   const receptionVenue = siteConfig.reception.location
-  const ceremonyAddress = siteConfig.ceremony.venue
+  const ceremonyAddress = siteConfig.wedding.venue
   const receptionAddress = siteConfig.reception.venue
 
   const groomName = siteConfig.couple.groomNickname || siteConfig.couple.groom
@@ -310,7 +310,7 @@ export function Footer() {
                 </h3>
                 <div className="space-y-3 sm:space-y-4">
                   <DetailRow label="Wedding Date" value={ceremonyDate} />
-                  <DetailRow label="Venue" value={toTitleCase(ceremonyVenue)} />
+                  {/* <DetailRow label="Venue" value={toTitleCase(ceremonyVenue)} /> */}
                 </div>
               </div>
 

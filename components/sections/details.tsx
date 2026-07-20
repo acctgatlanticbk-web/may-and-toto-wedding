@@ -155,7 +155,7 @@ const attireGuide = {
     imageAspect: "669/373",
     ladies: {
       colors: ["#D8B08F", "#E9C8B3", "#CFA08A"] as const,
-      description: "Champagne, Soft Beige, or Nude satin gowns with a formal, elegant silhouette",
+      description: "Champagne, Soft Beige or Nude elegant gown",
     },
     gentlemen: {
       colors: ["#111111", "#F5F5F5", "#CFA08A"] as const,

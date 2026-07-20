@@ -4,7 +4,6 @@ import type React from "react"
 import { useSiteConfig } from "@/hooks/use-site-config"
 import type { SiteConfig } from "@/lib/site-config"
 import { layeredSectionTitleSize, sectionType } from "@/lib/section-typography"
-import { MapPin } from "lucide-react"
 import { motion } from "motion/react"
 import { Cinzel } from "next/font/google"
 import localFont from "next/font/local"
@@ -363,20 +362,12 @@ function TimelineText({
       )}
 
       {event.location && (
-        <div
-          className={`mt-1.5 flex items-start gap-1.5 opacity-90 ${align === "right" ? "justify-end" : "justify-start"}`}
+        <p
+          className={`font-goudy-italic ${sectionType.text} mt-1.5 leading-relaxed opacity-90`}
+          style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
         >
-          <MapPin
-            className="mt-0.5 h-3.5 w-3.5 flex-shrink-0"
-            style={{ color: TIMELINE_TEXT, filter: ICON_SHADOW }}
-          />
-          <p
-            className={`font-goudy-italic ${sectionType.text} leading-relaxed`}
-            style={{ color: TIMELINE_TEXT, textShadow: READABLE_SHADOW }}
-          >
-            {event.location}
-          </p>
-        </div>
+          {event.location}
+        </p>
       )}
     </div>
   )

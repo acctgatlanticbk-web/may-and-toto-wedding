@@ -388,15 +388,15 @@ function ProposalDateBlock({
 function ProposalRoleTitle({ roleSingular }: { roleSingular: string }) {
   return (
     <div className="mx-auto w-full max-w-xl space-y-3 text-center sm:space-y-4">
-      <p
+      {/* <p
         className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.24em]`}
         style={{ color: palette.label }}
       >
         Will You Stand With Us As Our
-      </p>
+      </p> */}
 
-      <div className="flex items-center justify-center gap-3">
-        {/* <InlineDivider compact />
+      {/* <div className="flex items-center justify-center gap-3">
+       <InlineDivider compact />
         <span
           className={`${aboveTheBeyond.className} shrink-0 text-[clamp(1rem,3vw,1.35rem)] leading-none`}
           style={{ color: palette.accent }}
@@ -404,8 +404,8 @@ function ProposalRoleTitle({ roleSingular }: { roleSingular: string }) {
         >
           &
         </span>
-        <InlineDivider compact /> */}
-      </div>
+        <InlineDivider compact /> 
+      </div> */}
 
       <h2
         className={`${theSeasons.className} capitalize leading-[1.1] tracking-[0.06em] sm:tracking-[0.08em] [overflow-wrap:anywhere]`}
