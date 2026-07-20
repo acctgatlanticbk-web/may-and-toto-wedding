@@ -10,7 +10,7 @@ export const siteConfig = {
     groom: "Toto Irinco", //Ltryl B. Benitez
     groomNickname: "Toto",
     monogram:"/monogram/monogram.png" ,//Ltryl
-    backgroundMusic:"/background_music/Keenan Te - Rest of My Life (Wedding Version).mp3"
+    // backgroundMusic:"/background_music/Keenan Te - Rest of My Life (Wedding Version).mp3"
   },
   googleAPI:{
     messageForm: "https://docs.google.com/forms/d/e/1FAIpQLSfKXj_u3AgTP3DOCoYFjcG2dr9RVfAKy1rj8_nBikgihWHLLQ/formResponse",   //done

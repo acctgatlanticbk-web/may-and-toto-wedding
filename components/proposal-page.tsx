@@ -17,6 +17,7 @@ import { useSiteConfig } from "@/hooks/use-site-config"
 import { LoadingScreen } from "@/components/loader/LoadingScreen"
 import { getRoleSingular } from "@/lib/proposal-roles"
 import { parseWeddingDate } from "@/lib/wedding-date"
+import { sectionType, welcomeTitleSize } from "@/lib/section-typography"
 import { siteConfig as defaultSiteConfig } from "@/content/site"
 import type { ProposalRole, ProposalResponse } from "@/lib/proposal-types"
 
@@ -67,11 +68,9 @@ const dividerLineStyle = {
     "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent), transparent)",
 } as const
 
-const ct = {
-  label: "text-[11px] sm:text-xs md:text-sm",
-  sectionTitle: "text-[10px] sm:text-xs md:text-sm lg:text-base",
-  body: "text-xs sm:text-sm md:text-base",
-  bodyLg: "text-sm sm:text-base md:text-lg",
+const coupleLabelLineStyle = {
+  background:
+    "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
 } as const
 
 const nameStyle: CSSProperties = {
@@ -110,12 +109,65 @@ const labelStyle = (color: string, extra?: CSSProperties): CSSProperties => ({
   ...extra,
 })
 
+function OrnamentalDivider({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={`flex items-center justify-center ${compact ? "gap-1.5" : "gap-2"}`}>
+      <span
+        className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
+        style={dividerLineStyle}
+      />
+      <span className="h-0.5 w-0.5 rounded-full bg-motif-deep/45 sm:h-1 sm:w-1" aria-hidden />
+      <span
+        className={`h-px ${compact ? "w-6 sm:w-10" : "w-8 sm:w-12"}`}
+        style={{
+          background:
+            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-motif-deep) 38%, transparent))",
+        }}
+      />
+    </div>
+  )
+}
+
+function CoupleLabel({ groom, bride }: { groom: string; bride: string }) {
+  return (
+    <div className="flex items-center justify-center gap-2.5 pt-1 sm:gap-3.5 sm:pt-1.5">
+      <span className="h-px w-5 sm:w-7 md:w-9" style={coupleLabelLineStyle} aria-hidden />
+      <p
+        className={`${cinzel.className} ${sectionType.label} shrink-0 py-0.5 font-semibold uppercase leading-normal tracking-[0.34em] min-[400px]:tracking-[0.38em] sm:tracking-[0.44em]`}
+        style={{ color: palette.heading }}
+      >
+        {groom}
+        <span
+          className={`${aboveTheBeyond.className} mx-1.5 inline-block normal-case tracking-normal sm:mx-2`}
+          style={{
+            fontSize: "1.35em",
+            color: palette.accent,
+            verticalAlign: "middle",
+          }}
+          aria-hidden
+        >
+          &
+        </span>
+        {bride}
+      </p>
+      <span
+        className="h-px w-5 sm:w-7 md:w-9"
+        style={{
+          background:
+            "linear-gradient(to left, transparent, color-mix(in srgb, var(--color-welcome-navy) 35%, transparent))",
+        }}
+        aria-hidden
+      />
+    </div>
+  )
+}
+
 function LayeredProposalTitle({
   main,
   script,
-  titleSize = "clamp(1.55rem, 4.1vw + 0.65rem, 4.5rem)",
-  scriptSize = "clamp(1rem, 4vw, 2rem)",
-  scriptOverlap = "clamp(-0.6rem, -2.5vw, -1.35rem)",
+  titleSize = welcomeTitleSize.main,
+  scriptSize = welcomeTitleSize.script,
+  scriptOverlap = welcomeTitleSize.overlap,
   scriptClassName = "",
 }: {
   main: string
@@ -127,19 +179,19 @@ function LayeredProposalTitle({
 }) {
   return (
     <h2
-      className="relative mx-auto w-full max-w-full text-center"
+      className="welcome-title-lockup relative mx-auto w-full max-w-full text-center"
       style={
         {
-          "--title-size": titleSize,
+          "--welcome-size": titleSize,
           "--script-size": scriptSize,
           "--script-overlap": scriptOverlap,
         } as CSSProperties
       }
     >
       <span
-        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.15em] md:tracking-[0.18em]`}
+        className={`${theSeasons.className} block uppercase leading-[0.78] tracking-[0.08em] min-[400px]:tracking-[0.11em] sm:tracking-[0.13em] md:tracking-[0.14em]`}
         style={{
-          fontSize: "var(--title-size)",
+          fontSize: "var(--welcome-size)",
           color: palette.heading,
         }}
       >
@@ -162,18 +214,185 @@ function LayeredProposalTitle({
   )
 }
 
-function ProposalSaveTheDateTitle() {
-  return <LayeredProposalTitle main="Save The Date" script="for our wedding day" />
+function ProposalPersonalInvitationTitle() {
+  return <LayeredProposalTitle main="A Special Invitation" script="just for you" />
+}
+
+function ProposalFlowHeader({
+  icon,
+  main,
+  script,
+  iconClassName = "",
+  iconStyle,
+  animated = false,
+}: {
+  icon: ReactNode
+  main: string
+  script: string
+  iconClassName?: string
+  iconStyle?: CSSProperties
+  animated?: boolean
+}) {
+  const iconNode = (
+    <div
+      className={`flex h-12 w-12 items-center justify-center rounded-full shadow-sm backdrop-blur-sm ${iconClassName}`}
+      style={iconStyle}
+    >
+      {icon}
+    </div>
+  )
+
+  return (
+    <>
+      <div className="mb-6 flex justify-center">
+        {animated ? (
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: [0, 1.2, 1] }}
+            transition={{ duration: 0.6 }}
+          >
+            {iconNode}
+          </motion.div>
+        ) : (
+          iconNode
+        )}
+      </div>
+
+      <div className="mb-4">
+        <LayeredProposalTitle main={main} script={script} />
+      </div>
+    </>
+  )
+}
+
+function ProposalFlowSubheader({ children }: { children: ReactNode }) {
+  return (
+    <p
+      className={`${cinzel.className} ${sectionType.label} mx-auto mb-4 max-w-lg font-semibold uppercase tracking-[0.12em] sm:mb-5 sm:tracking-[0.16em] md:tracking-[0.18em]`}
+      style={{ color: palette.label }}
+    >
+      {children}
+    </p>
+  )
+}
+
+function ProposalFlowBody({
+  children,
+  className = "",
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <p
+      className={`font-goudy-italic mx-auto max-w-lg ${sectionType.textRelaxed} ${className}`}
+      style={{ color: palette.body }}
+    >
+      {children}
+    </p>
+  )
+}
+
+function ProposalDateBlock({
+  month,
+  dayShort,
+  dayNumber,
+  time,
+  year,
+}: {
+  month: string
+  dayShort: string
+  dayNumber: string
+  time: string
+  year: string
+}) {
+  const dateLineStyle = {
+    background:
+      "linear-gradient(to right, transparent, color-mix(in srgb, var(--color-welcome-navy) 28%, transparent), transparent)",
+  } as const
+
+  return (
+    <div className="mx-auto w-full max-w-2xl">
+      <div className="flex flex-col items-center gap-1.5 sm:gap-2.5 md:gap-3">
+        <span
+          className={`${cinzel.className} ${sectionType.label} font-light uppercase tracking-[0.4em] sm:tracking-[0.5em]`}
+          style={{ color: palette.heading }}
+        >
+          {month}
+        </span>
+
+        <div className="flex w-full items-center gap-2 sm:gap-4 md:gap-5">
+          <div className="flex flex-1 items-center justify-end gap-1.5 sm:gap-2.5">
+            <span className="h-[0.5px] flex-1" style={dateLineStyle} aria-hidden />
+            <span
+              className={`${cinzel.className} text-[0.6rem] font-light uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs`}
+              style={{ color: palette.heading }}
+            >
+              {dayShort}
+            </span>
+            <span
+              className="h-[0.5px] w-6 sm:w-8 md:w-10"
+              style={dateLineStyle}
+              aria-hidden
+            />
+          </div>
+
+          <div className="relative flex items-center justify-center px-3 sm:px-4 md:px-5">
+            <span
+              aria-hidden
+              className="absolute inset-0 mx-auto h-[70%] max-h-[180px] w-[100px] rounded-full opacity-80 blur-[28px] sm:w-[140px] md:w-[170px]"
+              style={{
+                background:
+                  "linear-gradient(to bottom, color-mix(in srgb, var(--color-welcome-green) 35%, transparent), color-mix(in srgb, var(--color-welcome-green) 18%, transparent), transparent)",
+              }}
+            />
+            <span
+              className={`${cinzel.className} relative text-[4rem] font-light leading-none tracking-wider sm:text-[5.5rem] md:text-[6.5rem] lg:text-[7rem]`}
+              style={{
+                color: palette.accent,
+                textShadow:
+                  "0 0 18px color-mix(in srgb, var(--color-welcome-green) 45%, transparent), 0 2px 8px color-mix(in srgb, var(--color-motif-deep) 12%, transparent)",
+              }}
+            >
+              {dayNumber}
+            </span>
+          </div>
+
+          <div className="flex flex-1 items-center gap-1.5 sm:gap-2.5">
+            <span
+              className="h-[0.5px] w-6 sm:w-8 md:w-10"
+              style={dateLineStyle}
+              aria-hidden
+            />
+            <span
+              className={`${cinzel.className} text-[0.6rem] font-light uppercase tracking-[0.3em] sm:text-[0.7rem] sm:tracking-[0.4em] md:text-xs`}
+              style={{ color: palette.heading }}
+            >
+              {time.split(",")[0]}
+            </span>
+            <span className="h-[0.5px] flex-1" style={dateLineStyle} aria-hidden />
+          </div>
+        </div>
+
+        <span
+          className={`${cinzel.className} ${sectionType.label} font-light uppercase tracking-[0.4em] sm:tracking-[0.5em]`}
+          style={{ color: palette.heading }}
+        >
+          {year}
+        </span>
+      </div>
+    </div>
+  )
 }
 
 function ProposalRoleTitle({ roleSingular }: { roleSingular: string }) {
   return (
     <div className="mx-auto w-full max-w-xl space-y-3 text-center sm:space-y-4">
       <p
-        className={`${cinzel.className} ${ct.sectionTitle} font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.24em]`}
+        className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.16em] sm:tracking-[0.2em] md:tracking-[0.24em]`}
         style={{ color: palette.label }}
       >
-        Will You Be Our
+        Will You Stand With Us As Our
       </p>
 
       <div className="flex items-center justify-center gap-3">
@@ -231,16 +450,6 @@ function DividerLine({ className = "w-16 sm:w-24 md:w-32" }: { className?: strin
   return <span className={`h-px ${className}`} style={dividerLineStyle} aria-hidden />
 }
 
-function InlineDivider({ compact = false }: { compact?: boolean }) {
-  return (
-    <span
-      className={compact ? "h-px w-6 sm:w-10" : "h-px flex-1"}
-      style={dividerLineStyle}
-      aria-hidden
-    />
-  )
-}
-
 function ProposalCard({ children, className = "" }: { children: ReactNode; className?: string }) {
   return (
     <div className={`relative w-full ${className}`}>
@@ -257,7 +466,7 @@ function ProposalCard({ children, className = "" }: { children: ReactNode; class
           <div className="pointer-events-none absolute left-0 top-0 z-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/decoration/decoration/left-top-decoration.png"
+              src="/decoration/decorations/top-left-corner.png"
               alt=""
               className={CORNER_DECO_CLASS}
             />
@@ -265,7 +474,7 @@ function ProposalCard({ children, className = "" }: { children: ReactNode; class
           <div className="pointer-events-none absolute right-0 top-0 z-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/decoration/decoration/right-top-decoration.png"
+              src="/decoration/decorations/top-right-corner.png"
               alt=""
               className={CORNER_DECO_CLASS}
             />
@@ -273,7 +482,7 @@ function ProposalCard({ children, className = "" }: { children: ReactNode; class
           <div className="pointer-events-none absolute bottom-0 left-0 z-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/decoration/decoration/left-bottom-decoration%20(2).png"
+              src="/decoration/decorations/bottom-left-corner.png"
               alt=""
               className={CORNER_DECO_CLASS}
             />
@@ -281,7 +490,7 @@ function ProposalCard({ children, className = "" }: { children: ReactNode; class
           <div className="pointer-events-none absolute bottom-0 right-0 z-10">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/decoration/decoration/right-bottom-decoration%20(2).png"
+              src="/decoration/decorations/bottom-right-corner.png"
               alt=""
               className={CORNER_DECO_CLASS}
             />
@@ -324,126 +533,70 @@ function ProposalIntroSection() {
     () => parseWeddingDate(ceremonyDate, parseWeddingDate(defaultSiteConfig.ceremony.date)),
     [ceremonyDate],
   )
-  const ceremonyDay = (
+  const ceremonyDayShort = (
     siteConfig.ceremony.day ?? parsedDate.dayOfWeek ?? defaultSiteConfig.ceremony.day
-  ).toUpperCase()
+  )
+    .slice(0, 3)
+    .toUpperCase()
   const ceremonyTime =
     siteConfig.ceremony.time ?? siteConfig.wedding.time ?? defaultSiteConfig.ceremony.time
   const { month, day: dateNum, year } = parsedDate
+  const venue =
+    siteConfig.wedding.venue ?? siteConfig.ceremony.location ?? defaultSiteConfig.ceremony.location
 
   return (
     <div
-      className="mx-auto w-full max-w-[310px] space-y-5 text-center sm:space-y-6 md:max-w-[520px] md:space-y-7"
+      className="mx-auto w-full max-w-xl space-y-5 text-center sm:space-y-6 md:space-y-7"
       style={{ color: palette.body, WebkitFontSmoothing: "antialiased" }}
     >
-      <div className="my-2 sm:my-3 md:my-4">
-        <ProposalSaveTheDateTitle />
+      <header className="space-y-3 px-1 sm:space-y-3.5 sm:px-2 md:space-y-4">
+        <CoupleLabel groom={groomNickname} bride={brideNickname} />
+        <ProposalPersonalInvitationTitle />
+        <div className="pt-2 sm:pt-2.5">
+          <OrnamentalDivider compact />
+        </div>
+      </header>
+
+      <div
+        className={`font-goudy-italic mx-auto max-w-xl space-y-3 px-1 text-pretty sm:space-y-3.5 sm:px-2 ${sectionType.textRelaxed}`}
+        style={{ color: palette.body }}
+      >
+        <p>
+          As we prepare for our wedding day, we keep coming back to the people who have meant the
+          most to us — and you are one of them.
+        </p>
+        <p>
+          This is not a general invitation. It is a personal ask, from our hearts to yours: we would
+          love for you to be part of our celebration in a way that is truly special.
+        </p>
       </div>
 
       <p
-        className={`font-goudy-italic mx-auto max-w-xl px-2 ${ct.bodyLg} leading-[1.62] sm:leading-[1.65]`}
-        style={{ color: palette.body }}
+        className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.14em] sm:tracking-[0.18em] md:tracking-[0.22em]`}
+        style={{ color: palette.label }}
       >
-        With joy in our hearts, we ask you to stand with us at their wedding celebration.
-        Together with their families, they warmly invite you to share in this special day.
+        Our wedding day
       </p>
 
-      <div className="flex items-center justify-center pt-1 sm:pt-2">
-        <DividerLine />
-      </div>
+      {/* <CoupleNameImage groom={groomNickname} bride={brideNickname} className="my-1 sm:my-2" /> */}
 
-      <CoupleNameImage groom={groomNickname} bride={brideNickname} className="my-1 sm:my-2" />
+      <ProposalDateBlock
+        month={month}
+        dayShort={ceremonyDayShort}
+        dayNumber={dateNum}
+        time={ceremonyTime}
+        year={year}
+      />
 
-      {/* Date block */}
-      <div className="w-full">
-        <div
-          className="mx-auto grid w-full max-w-[260px] gap-y-0 md:max-w-[340px]"
-          style={{
-            gridTemplateColumns: "1fr auto 1fr",
-            gridTemplateRows: "auto auto auto",
-          }}
-        >
-          <div
-            className="col-start-2 row-start-1 border-x border-t border-dotted px-1.5 pb-0 pt-0.5 text-center md:px-2"
-            style={{ borderColor: palette.heading }}
-          >
-            <span
-              className="text-[10px] tracking-[0.18em] uppercase md:text-[12px]"
-              style={labelStyle(palette.heading)}
-            >
-              {month}
-            </span>
-          </div>
+      <p
+        className={`${cinzel.className} ${sectionType.subheader} font-medium uppercase tracking-[0.22em] sm:tracking-[0.26em] md:tracking-[0.3em]`}
+        style={{ color: palette.heading }}
+      >
+        {venue}
+      </p>
 
-          <div className="col-start-1 row-start-2 flex flex-col justify-center gap-[2px] px-0.5 md:px-1">
-            <div className="border-t border-dotted" style={{ borderColor: palette.heading }} />
-            <span
-              className="text-center text-[10px] tracking-[0.14em] uppercase md:text-[12px]"
-              style={labelStyle(palette.heading)}
-            >
-              {ceremonyDay}
-            </span>
-            <div className="border-t border-dotted" style={{ borderColor: palette.heading }} />
-          </div>
-
-          <div
-            className="col-start-2 row-start-2 flex items-center justify-center border-x border-dotted px-1 pb-0 pt-0 md:px-1.5"
-            style={{ borderColor: palette.heading }}
-          >
-            <span
-              className="leading-[0.85]"
-              style={labelStyle(palette.heading, {
-                fontSize: "clamp(48px, 13vw, 64px)",
-                color: palette.accent,
-              })}
-            >
-              {dateNum}
-            </span>
-          </div>
-
-          <div className="col-start-3 row-start-2 flex flex-col justify-center gap-[2px] px-0.5 md:px-1">
-            <div className="border-t border-dotted" style={{ borderColor: palette.heading }} />
-            <span
-              className="whitespace-nowrap text-center text-[10px] tracking-[0.14em] uppercase md:text-[12px]"
-              style={labelStyle(palette.heading)}
-            >
-              At {ceremonyTime}
-            </span>
-            <div className="border-t border-dotted" style={{ borderColor: palette.heading }} />
-          </div>
-
-          <div
-            className="col-start-2 row-start-3 border-x border-b border-dotted px-1.5 pb-0.5 pt-0 text-center md:px-2"
-            style={{ borderColor: palette.heading }}
-          >
-            <span
-              className="text-[14px] leading-none tracking-[0.1em] md:text-[18px]"
-              style={labelStyle(palette.heading)}
-            >
-              {year}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Venue */}
-      <div className="flex w-full flex-col items-center gap-2">
-        <div className="flex w-full items-center justify-center gap-2">
-          <InlineDivider compact />
-          <span
-            className={`font-goudy-italic shrink-0 ${ct.body}`}
-            style={{ color: palette.body }}
-          >
-            at
-          </span>
-          <InlineDivider compact />
-        </div>
-        <p
-          className={`${cinzel.className} ${ct.sectionTitle} font-semibold uppercase tracking-[0.1em] sm:tracking-[0.14em]`}
-          style={{ color: palette.heading }}
-        >
-          {siteConfig.ceremony.location}
-        </p>
+      <div className="pt-1 sm:pt-2">
+        <OrnamentalDivider compact />
       </div>
     </div>
   )
@@ -532,7 +685,7 @@ function ProposalAskSection({
               style={{ shapeOutside: "margin-box" }}
             >
               <Image
-                src="/Details/sponsors.png"
+                src="/Details/coupleImage.png"
                 alt=""
                 fill
                 className="object-contain object-bottom drop-shadow-[0_20px_48px_rgba(42,37,32,0.12)]"
@@ -545,7 +698,7 @@ function ProposalAskSection({
               <ProposalRoleTitle roleSingular={roleSingular} />
 
               <p
-                className={`font-goudy-italic mx-auto max-w-lg ${ct.bodyLg} leading-[1.8] sm:leading-[1.9] sm:text-left`}
+                className={`font-goudy-italic mx-auto max-w-lg ${sectionType.textRelaxed} sm:text-left`}
                 style={{ color: palette.body }}
               >
                 &ldquo;{description}&rdquo;
@@ -588,7 +741,7 @@ function ProposalAskSection({
               style={questionHeight ? { minHeight: "var(--ask-image-h)" } : undefined}
             >
               <Image
-                src="/Details/guest.png"
+                src="/Details/coupleImage.png"
                 alt=""
                 fill
                 className="object-contain object-bottom drop-shadow-[0_20px_48px_rgba(42,37,32,0.12)]"
@@ -713,7 +866,7 @@ export function ProposalPage({ role }: ProposalPageProps) {
       {process.env.NEXT_PUBLIC_ENABLE_DECOR !== "false" && (
         <div className="pointer-events-none fixed inset-0 z-0" aria-hidden>
           <Suspense fallback={<div className="h-full w-full bg-gradient-to-b from-primary/10 to-secondary/5" />}>
-            <Silk speed={5} scale={1.1} color="#94B8C8" noiseIntensity={0.8} rotation={0.3} />
+            <Silk speed={5} scale={1.1} color="#FA9A84" noiseIntensity={0.8} rotation={0.3} />
           </Suspense>
         </div>
       )}
@@ -741,26 +894,49 @@ export function ProposalPage({ role }: ProposalPageProps) {
                 <ProposalIntroSection />
 
                 <div
-                  className="mx-auto max-w-xl space-y-4 px-1 py-6 sm:space-y-6 sm:px-0 sm:py-9"
+                  className="mx-auto max-w-xl space-y-4 px-1 py-6 sm:space-y-5 sm:px-2 sm:py-9"
                 >
-                  <div className="flex items-center justify-center pb-2 sm:pb-3">
-                    <DividerLine className="w-full max-w-md" />
-                  </div>
-                  <p className={`font-goudy-italic text-pretty ${ct.bodyLg} leading-[1.8] sm:leading-[1.9]`} style={{ color: palette.body }}>
-                    &ldquo;As we enter the next chapter of our lives as husband and wife, we seek
-                    the guidance and support of special people who have inspired us through their
-                    love, wisdom, and example.&rdquo;
-                  </p>
-                  <p
-                    className={`${cinzel.className} ${ct.sectionTitle} font-semibold leading-relaxed tracking-[0.1em] uppercase sm:tracking-[0.14em] md:tracking-[0.16em]`}
-                    style={{ color: palette.heading }}
+                  <figure
+                    className="rounded-md border px-4 py-3.5 sm:rounded-lg sm:px-5 sm:py-4"
+                    style={{
+                      background: INNER_SURFACE,
+                      borderColor: BORDER_SOFT,
+                    }}
                   >
-                    Because you are a role model of love, laughter, and happily ever after, it
-                    would be our honor if you would stand with us and witness our love as our:
-                  </p>
-                  {/* <div className="flex items-center justify-center pt-2 sm:pt-3">
-                    <DividerLine className="w-full max-w-md" />
-                  </div> */}
+                    <blockquote>
+                      <p
+                        className={`font-goudy-italic ${sectionType.textSnug}`}
+                        style={{ color: palette.body }}
+                      >
+                        In choosing who will stand with us, we did not begin with titles — we began
+                        with the people who have walked with us, believed in us, and loved us along
+                        the way.
+                      </p>
+                    </blockquote>
+                  </figure>
+
+                  <div
+                    className={`font-goudy-italic space-y-3 text-pretty sm:space-y-3.5 ${sectionType.textRelaxed}`}
+                    style={{ color: palette.body }}
+                  >
+                    <p>
+                      You have been a blessing in our lives — through your kindness, your laughter,
+                      and the love you have shown us. That is why we are reaching out to you
+                      personally, and not to everyone.
+                    </p>
+                    <p>
+                      We cannot imagine this day without the people who matter most standing close
+                      beside us. If your heart is open to it, it would mean the world to us to
+                      have you there not only as someone we cherish, but as an important part of
+                      our wedding.
+                    </p>
+                    <p
+                      className={`${cinzel.className} ${sectionType.label} font-semibold uppercase tracking-[0.1em] sm:tracking-[0.14em] md:tracking-[0.16em]`}
+                      style={{ color: palette.heading }}
+                    >
+                      With sincerity and gratitude, we ask — would you stand with us as our:
+                    </p>
+                  </div>
                 </div>
 
                 <ProposalAskSection
@@ -786,22 +962,26 @@ export function ProposalPage({ role }: ProposalPageProps) {
             >
               <ProposalCard>
               <div className="relative z-10 w-full space-y-4 py-1 sm:space-y-6 sm:py-3">
-                <div className="flex justify-center">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-emerald-200/80 bg-emerald-50/90 shadow-sm backdrop-blur-sm sm:h-12 sm:w-12">
-                    <Check className="h-5 w-5 text-emerald-600 sm:h-6 sm:w-6" />
-                  </div>
-                </div>
+                <ProposalFlowHeader
+                  icon={<Check className="h-6 w-6 text-emerald-600" />}
+                  iconClassName="border border-emerald-200/80 bg-emerald-50/90"
+                  main="We are Honored"
+                  script="you said yes"
+                />
+
+                <ProposalFlowSubheader>A few details to complete your response</ProposalFlowSubheader>
+
+                <ProposalFlowBody className="mb-2 max-w-md text-center sm:mb-3">
+                  Thank you for accepting our invitation to stand with us. Your yes means more to
+                  us than we can easily put into words — we are truly grateful.
+                </ProposalFlowBody>
 
                 <p
-                  className={`font-goudy-italic mx-auto max-w-md text-center ${ct.bodyLg} leading-[1.75] sm:leading-[1.85]`}
-                  style={{ color: palette.heading }}
+                  className={`font-goudy-italic mx-auto mb-1 max-w-md text-center ${sectionType.textSnug}`}
+                  style={{ color: palette.bodySoft }}
                 >
-                  We are honored to have you as part of our special day.
-                </p>
-
-                <p className={`font-goudy-italic mx-auto max-w-md ${ct.body} leading-[1.75] sm:leading-[1.85]`} style={{ color: palette.body }}>
-                  Thank you for accepting our proposal! Please enter the exact name you would like
-                  displayed on our wedding invitation and guestlists:
+                  Please enter the exact name you would like displayed on our wedding invitation
+                  and guest lists:
                 </p>
 
                 <div className="mx-auto max-w-md text-left">
@@ -864,53 +1044,58 @@ export function ProposalPage({ role }: ProposalPageProps) {
             >
               <ProposalCard>
               <div className="relative z-10 space-y-4">
-                <div className="relative mb-6 flex justify-center">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: [0, 1.2, 1] }}
-                    transition={{ duration: 0.6 }}
-                    className="flex h-16 w-16 items-center justify-center rounded-full shadow-sm backdrop-blur-sm"
-                    style={{
-                      color: palette.heading,
-                      border: `1px solid ${BORDER_SOFT}`,
-                      backgroundColor: INNER_SURFACE,
-                      boxShadow: "0 8px 24px rgba(45, 67, 79, 0.08)",
-                    }}
-                  >
-                    <Sparkles className="h-8 w-8" />
-                  </motion.div>
-                </div>
+                <ProposalFlowHeader
+                  animated
+                  icon={<Sparkles className="h-8 w-8" style={{ color: palette.heading }} />}
+                  iconClassName=""
+                  iconStyle={{
+                    color: palette.heading,
+                    border: `1px solid ${BORDER_SOFT}`,
+                    backgroundColor: INNER_SURFACE,
+                    boxShadow: "0 8px 24px rgba(45, 67, 79, 0.08)",
+                  }}
+                  main="It's Official"
+                  script="thank you"
+                />
 
-                <div className="mb-4">
-                  <LayeredProposalTitle main="It's Official" script="thank you" />
-                </div>
+                <ProposalFlowSubheader>Your response has been received</ProposalFlowSubheader>
 
                 <div
-                  className="mx-auto mb-6 max-w-sm rounded-2xl px-6 py-4 shadow-sm backdrop-blur-sm"
+                  className="mx-auto mb-2 max-w-sm rounded-2xl px-6 py-4 shadow-sm backdrop-blur-sm sm:mb-4"
                   style={{ border: `1px solid ${BORDER_SOFT}`, backgroundColor: INNER_SURFACE }}
                 >
-                  <span className={`${cinzel.className} mb-1 block text-[10px] font-semibold tracking-[0.16em] uppercase`} style={labelStyle(palette.label)}>
-                    Registered partner
+                  <span
+                    className={`${cinzel.className} mb-1 block text-[10px] font-semibold tracking-[0.16em] uppercase sm:text-[12px]`}
+                    style={labelStyle(palette.label)}
+                  >
+                    Registered name
                   </span>
                   <p
-                    className={`font-goudy-italic ${ct.bodyLg} font-medium`}
+                    className={`font-goudy-italic ${sectionType.text} font-medium`}
                     style={{ ...nameStyle, color: palette.heading }}
                   >
                     {preferredName}
                   </p>
-                  <span className="font-goudy-italic mt-1.5 block text-[13px]" style={{ color: palette.body }}>
-                    for the position of {role.title}
+                  <span
+                    className={`${cinzel.className} mt-2 block text-[10px] font-semibold tracking-[0.14em] uppercase sm:text-[11px]`}
+                    style={{ color: palette.bodySoft }}
+                  >
+                    Standing as our {role.title}
                   </span>
                 </div>
 
-                <p className="font-goudy-italic mx-auto mb-10 max-w-md text-[13px] leading-[1.75] sm:text-[15px] sm:leading-[1.85]" style={{ color: palette.body }}>
-                  Thank you so much. Having you stand with us fills our hearts with endless joy
-                  and confidence. We can&apos;t wait to celebrate together on our wedding day!
-                </p>
+                <ProposalFlowBody className="mb-8 max-w-md text-center sm:mb-10">
+                  Having you stand with us fills our hearts with joy and gratitude. We cannot wait
+                  to celebrate this beautiful day together with you by our side.
+                </ProposalFlowBody>
+
+                <div className="flex items-center justify-center pb-2 sm:pb-3">
+                  <DividerLine className="w-full max-w-md" />
+                </div>
 
                 <Link
                   href="/"
-                  className={`${primaryBtnClass} inline-block w-full max-w-sm`}
+                  className={`${primaryBtnClass} mx-auto inline-block w-full max-w-sm`}
                   style={primaryBtnStyle}
                 >
                   Return to Wedding Page
@@ -929,24 +1114,20 @@ export function ProposalPage({ role }: ProposalPageProps) {
             >
               <ProposalCard>
               <div className="relative z-10 space-y-4">
-                <div className="mb-6 flex justify-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full border border-rose-200/80 bg-rose-50/90 shadow-sm backdrop-blur-sm">
-                    <X className="h-6 w-6 text-rose-500" />
-                  </div>
-                </div>
+                <ProposalFlowHeader
+                  icon={<X className="h-6 w-6 text-rose-500" />}
+                  iconClassName="border border-rose-200/80 bg-rose-50/90"
+                  main="Thank You"
+                  script="for responding"
+                />
 
-                <div className="mb-4">
-                  <LayeredProposalTitle main="Thank You" script="for responding" />
-                </div>
+                <ProposalFlowSubheader>We understand and appreciate your honesty</ProposalFlowSubheader>
 
-                <p
-                  className={`font-goudy-italic mx-auto mb-10 max-w-lg ${ct.bodyLg} leading-[1.75] sm:leading-[1.85]`}
-                  style={{ color: palette.body }}
-                >
-                  &ldquo;Thank you for taking the time to respond. While we&apos;re saddened that
-                  you won&apos;t be able to join us in this role, we truly appreciate your support
-                  and well wishes as we begin this new chapter together.&rdquo;
-                </p>
+                <ProposalFlowBody className="mb-8 max-w-lg text-center sm:mb-10">
+                  While we&apos;re saddened that you won&apos;t be able to join us in this role, we
+                  truly appreciate your support and well wishes as we begin this new chapter
+                  together.
+                </ProposalFlowBody>
 
                 <div className="flex items-center justify-center pt-4">
                   <DividerLine className="w-full max-w-md" />
@@ -980,34 +1161,34 @@ export function ProposalPage({ role }: ProposalPageProps) {
             >
               <ProposalCard>
               <div className="relative z-10 space-y-4">
-                <div className="mb-6 flex justify-center">
-                  <div
-                    className="flex h-12 w-12 items-center justify-center rounded-full shadow-sm backdrop-blur-sm"
-                    style={{
-                      color: palette.heading,
-                      border: `1px solid ${BORDER_SOFT}`,
-                      backgroundColor: INNER_SURFACE,
-                    }}
-                  >
-                    <Heart className="h-6 w-6" />
-                  </div>
-                </div>
+                <ProposalFlowHeader
+                  icon={<Heart className="h-6 w-6" style={{ color: palette.heading }} />}
+                  iconStyle={{
+                    color: palette.heading,
+                    border: `1px solid ${BORDER_SOFT}`,
+                    backgroundColor: INNER_SURFACE,
+                  }}
+                  main="Response Sent"
+                  script="successfully"
+                />
 
-                <div className="mb-4">
-                  <LayeredProposalTitle
-                    main="Response Sent"
-                    script="successfully"
-                    titleSize="clamp(1.35rem, 3.5vw + 0.5rem, 3.5rem)"
-                  />
-                </div>
+                <ProposalFlowSubheader>Your message has reached us</ProposalFlowSubheader>
 
-                <p className={`font-goudy-italic mx-auto mb-8 max-w-md ${ct.body} leading-[1.75] sm:leading-[1.85]`} style={{ color: palette.body }}>
+                <ProposalFlowBody className="mb-6 max-w-md text-center sm:mb-8">
                   We have received your response. Your love, support, and well wishes mean the
                   world to us regardless. We look forward to celebrating other special milestones
-                  with you in the future!
-                </p>
+                  with you in the future.
+                </ProposalFlowBody>
 
-                <Link href="/" className={secondaryBtnClass} style={secondaryBtnStyle}>
+                <div className="flex items-center justify-center pb-2 sm:pb-3">
+                  <DividerLine className="w-full max-w-md" />
+                </div>
+
+                <Link
+                  href="/"
+                  className={`${secondaryBtnClass} mx-auto inline-block w-full max-w-sm`}
+                  style={secondaryBtnStyle}
+                >
                   Return to Wedding Page
                 </Link>
               </div>
