@@ -676,7 +676,7 @@ function ProposalAskSection({
         <div className="relative mt-8 flex flex-col gap-5 sm:mt-10 sm:flex-row sm:items-end sm:justify-between sm:gap-8 md:gap-10">
           {/* Question + quote — text wraps around floated image on mobile */}
           <div className="relative z-10 min-w-0 flex-1 text-center sm:text-left">
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
@@ -692,7 +692,7 @@ function ProposalAskSection({
                 sizes="44vw"
                 priority
               />
-            </motion.div>
+            </motion.div> */}
 
             <div ref={questionRef} className="mx-auto w-full max-w-xl space-y-5 sm:space-y-6">
               <ProposalRoleTitle roleSingular={roleSingular} />

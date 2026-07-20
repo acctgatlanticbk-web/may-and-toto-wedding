@@ -106,11 +106,10 @@ export default function Home() {
       
               {/* <PrincipalSponsors /> */}
               <WeddingPlaylist />
-              <FAQ />
-              
+
               <Registry />
               <SnapShare />
-
+              <FAQ />
               <Footer />
             </div>
           </div>
