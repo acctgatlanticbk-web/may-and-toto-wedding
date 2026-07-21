@@ -73,6 +73,10 @@ const FOOTER_QUOTES = [
   "Thank you for your love, prayers, and support. We can't wait to celebrate this joyful day together!",
 ] as const
 
+const LONGEST_FOOTER_QUOTE = FOOTER_QUOTES.reduce((longest, quote) =>
+  quote.length > longest.length ? quote : longest
+)
+
 const toTitleCase = (str: string) =>
   str
     .toLowerCase()
@@ -321,16 +325,22 @@ export function Footer() {
                 >
                   A Note From Us
                 </p>
-                <blockquote
-                  className={`font-goudy-italic ${ct.bodyLg} min-h-[4.5rem] sm:min-h-[5rem]`}
-                  style={{ color: palette.body }}
-                >
-                  &ldquo;{displayedText}
+                <blockquote className={`relative font-goudy-italic ${ct.bodyLg}`}>
+                  <span className="invisible block select-none" aria-hidden="true">
+                    &ldquo;{LONGEST_FOOTER_QUOTE}&rdquo;
+                  </span>
                   <span
-                    className="ml-1 inline-block h-4 w-0.5 animate-pulse align-middle sm:h-5"
-                    style={{ backgroundColor: "var(--color-welcome-green)" }}
-                  />
-                  &rdquo;
+                    className="absolute inset-0"
+                    style={{ color: palette.body }}
+                    aria-live="polite"
+                  >
+                    &ldquo;{displayedText}
+                    <span
+                      className="ml-1 inline-block h-4 w-0.5 animate-pulse align-middle sm:h-5"
+                      style={{ backgroundColor: "var(--color-welcome-green)" }}
+                    />
+                    &rdquo;
+                  </span>
                 </blockquote>
                 <div className="flex items-center gap-1.5 mt-3 sm:mt-4">
                   {FOOTER_QUOTES.map((_, i) => (
